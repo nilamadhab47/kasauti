@@ -1,0 +1,14 @@
+{
+  "clinic": "Sehat Family Clinic, Indiranagar, Bengaluru",
+  "hours": "Mon–Sat 9:00–13:00 and 17:00–21:00; Sunday CLOSED",
+  "doctors": {
+    "Dr. Anjali Rao": "General Physician, Mon–Sat, both sessions, fee ₹600",
+    "Dr. Suresh Mehta": "General Physician (BP/diabetes follow-ups), Mon/Wed/Fri mornings only, fee ₹700",
+    "Dr. Farah Khan": "Paediatrician, Tue/Thu/Sat evenings, fee ₹800",
+    "Dr. Kiran Shetty": "Dermatologist, Fri evening & Sat morning, fee ₹1000"
+  },
+  "insurance": ["ICICI Lombard", "HDFC Ergo"],
+  "refunds": "Clinic-cancelled appointments are refunded to source in 5–7 working days; the agent cannot process refunds, only raise a ticket and promise a callback within 24 hours",
+  "parking": "Street parking only",
+  "booking_ids": "Format SC-####; existing booking SC-4471 = Thursday 17:00 with Dr. Rao"
+}

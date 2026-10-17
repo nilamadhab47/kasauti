@@ -1,0 +1,791 @@
+{
+  "id": "3ee2277b-dae4-4a4f-b534-87ac6f047739",
+  "agent_id": "7c86a6ce-7ad4-48d6-9ac4-0e767d06cb14",
+  "batch_id": null,
+  "scheduled_at": null,
+  "answered_by_voice_mail": null,
+  "conversation_duration": 180,
+  "total_cost": 18,
+  "transcript": "assistant: हेलो? हाँ, हेलो? Clinic से बात हो रही है?\nuser: हाउ कैन आई हेल्प यू?\nassistant: देखिए, मेरा पैसा कटा\nuser: हाउ कैन आई असिस्ट यू विथ योर रिपोर्ट?\nuser: यू आर अपॉइंटमेंट टुडे।\nassistant: नहीं नहीं, बात सुनिए, मेरा पैसा कटा है, ₹500, UPI से, और appointment आपने खुद cancel\nuser: कुड यू प्लीज टेल मी योर नेम एंड द डॉक्टर?\nassistant: हाँ हाँ,\nuser: डॉक्टर और हेल्थ इशू यू नीड एन अपॉइंटमेंट फॉर।\nuser: आई विल हेल्प यू विथ द बुकिंग।\nassistant:  नहीं, मैं booking की बात नहीं कर रहा, मेरा पैसा कटा है transaction ID T2410UPI88231, और appointment clinic ने cancel कर दिया, refund कब होगा बताइए।\nuser: थैंक यू लिक्रेसिया\nassistant: देखिए, sorry-वॉरी मत\nuser: कुड यू प्लीज टेल मी द डॉक्टर यू वांट टू सी?\nuser: और द हेल्थ इशू।\nassistant: अरे नहीं, डॉक्टर या हेल्थ\nuser: ओ सो।\nassistant: देखिए, appointment\nuser: ले मी नो योर प्रेफर्ड डेट एंड टाइम फॉर द अपॉइंटमेंट।\nassistant: नहीं, मैं appointment लेना नहीं चाहता, मेरा पैसा ₹500 जो UPI से कटा है, वो refund\nuser: प्लीज प्रोवाइड द अपॉइंटमेंट डेट।\nassistant: देखिए, appointment तो clinic ने\nuser: और द डॉक्टर्स नेम फॉर द अपॉइंटमेंट यू वांट टू कैंसिल। आई अंडरस्टैंड।\nuser: समझ रहे हैं कि आप आपके अपॉइंटमेंट कैंसिल कर चाहते हैं।\nassistant: नहीं नहीं, appointment\nuser: कुड यू प्लीज शेयर द अपॉइंटमेंट डेट?\nassistant: हाँ हाँ,\nuser: और द डॉक्टर्स नाम सो आई कैन असिस्ट यू विद द कैंसिलेशन\nassistant: डॉक्टर का नाम डॉ. शर्मा था,\nuser: कुड यू प्लीज कंफर्म द डेट और द डॉक्टर्स नेम फॉर द अपॉइंटमेंट यू वांट टू कैंसिल? दिस विल हेल्प।\nuser: हेल्प मी फाइंड इट क्विकली।\nassistant: ठीक है, appointment थी 15 अक्टूबर को, डॉक्टर डॉ. शर्मा, transaction ID T2410UPI88231 है, ये सब नोट\nuser: थैंक यू फॉर द डिटेल।\nassistant: अब बताइए, refund\nuser: आई हैव कैंसिल्ड योर अपॉइंटमेंट विद डॉक्टर शर्मा।\nuser: इफ यू नीड टू री\nuser: री स्केड्यूल और बुक अ न्यू रिपोर्ट। न्यू अपॉइंटमेंट।\nuser: प्लीज लेट मी नो।\nassistant:  देखिए, मैं नई appointment नहीं चाहता, मेरा पैसा ₹500 वापस कब आएगा? Exact time बताइए।\nuser: श्योर। प्लीज।\nuser: प्लीज प्रोवाइड योर नेम।\nassistant: मैं शर्मा\nuser: द डॉक्टर और हेल्थ इशू। एंड योर।\nassistant: हाँ, डॉक्टर डॉ.\nuser: योर प्रिफर्ड डेट एंड टाइम फॉर द अपॉइंटमेंट।\nassistant:  नहीं, मुझे appointment नहीं चाहिए, मेरा पैसा ₹500 जो UPI से कटा है, refund कब होगा बताइए?\nuser: कुछ।\nuser: वुड यू प्लीज टेल मी योर फुल नेम?\nassistant:  जी, मेरा नाम शर्मा जी है।\nuser: इन द डॉक्टर और हेल्थ इशू यू नीड एन अपॉइंटमेंट फॉर। और फिर।\nuser: योर प्रेफर्ड डेट एंड टाइम।\nassistant:  देखिए, appointment की बात नहीं कर रहा, मेरा पैसा ₹500 जो UPI से कटा है, appointment आपने cancel किया, refund कब मिलेगा?\nuser: आई कैन असिस्ट विद कैंसलिंग योर अपॉइंटमेंट। कुड यू प्लीज़। प्लीज।\nassistant: नहीं, appointment cancel\nuser: और डॉक्टर्स नेम फॉर रिफंड डिटेल्स।\nassistant: डॉक्टर\nuser: आई विल गाइड यू वंस द कैंसिलेशन इज कन्फर्म्ड।\nassistant: ठीक है, cancellation confirmed\nuser: प्लीज टेल मी द डॉक्टर्स नेम।\nassistant: डॉक्टर का नाम डॉ. शर्मा\nuser: और द हेल्थ इशू यू नीड हेल्प। हेल्प विथ।\nuser: सो आई कैन असिस्ट।\nuser: जु विद योर अपॉइंटमेंट।\nassistant: देखिए, मैं appointment नहीं ले रहा,\nuser: कुड यू प्लीज स्पीक कर दो।\nuser: प्लीज स्पेसिफाई द डॉक्टर्स नेम।\nassistant: डॉक्टर का नाम डॉ. शर्मा है, transaction ID\nuser: और द हेल्थ इशू यू वांट टू बुक एन अपॉइंटमेंट फॉर\nassistant: नहीं, मैं appointment नहीं लेना चाहता, मेरा पैसा ₹500 जो UPI से कटा है, refund कब\nuser: प्लीज प्रोवाइड द डॉक्टर्स नेम और अपॉइंटमेंट डेट सो आई कैन हेल्प कैंसिल योर अपॉइंटमेंट।\nassistant: डॉक्टर का नाम डॉ. शर्मा था, appointment date\nuser: प्लीज प्रोवाइड योर अपॉइंटमेंट डिटेल्स लाइक डॉक्टर्स नेम एंड डेट। इन आइ पर।\nassistant: हाँ हाँ,\nuser: कुड यू प्लीज प्रोवाइड द\nassistant: देखिए, transaction ID\nuser: फुल ट्रांजैक्शन आई डी।\nuser: डॉक्टर के नाम और अपॉइंटमेंट डेट।\nassistant: हाँ हाँ,\nuser: सो आई कैन असिस्ट यू विद द रिफंड।\nassistant: डॉक्टर डॉ. शर्मा थे, appointment\nuser: कुड यू प्लीज प्रोवाइड द फुल ट्रांस\nassistant: हाँ हाँ, transaction ID है\nuser: प्लीज टेल मी द डॉक्टर्स फुल नेम।\nuser: टीम एंड द अपॉइंटमेंट डे टू।\nuser: थैंक यू फॉर द डिटेल। आई हैव नोटेड।\nassistant: अब\nuser: नोटेड योर ट्रांजैक्शन आईडी टी टू फोर टेन।\nuser: कुड यू प्लीज कन्फर्म इट?\n",
+  "usage_breakdown": {
+    "llmModel": {
+      "gpt-4.1-mini": {
+        "input": 86823,
+        "output": 1610
+      }
+    },
+    "voice_id": "shubh_enhi_banking",
+    "llmTokens": 0,
+    "provider_source": {
+      "llm": "bolna",
+      "synthesizer": "bolna",
+      "transcriber": "bolna"
+    },
+    "synthesizer_model": "bulbul:v4-flash",
+    "transcriber_model": "saaras:v3",
+    "llm_usage_breakdown": {
+      "hangup": {
+        "input": 36331,
+        "model": "gpt-4o-mini",
+        "output": 400,
+        "provider": "openai",
+        "provider_connected": false
+      },
+      "analytics": null,
+      "extraction": null,
+      "disposition": {
+        "input": 0,
+        "model": null,
+        "output": 0,
+        "cached_tokens": 0,
+        "llm_key_source": []
+      },
+      "conversation": {
+        "input": 86823,
+        "model": "gpt-4.1-mini",
+        "output": 1610,
+        "provider": "openai",
+        "routing_target": null,
+        "provider_connected": false
+      },
+      "summarization": null
+    },
+    "synthesizer_provider": "sarvam",
+    "transcriber_duration": 179.8,
+    "transcriber_language": "hi",
+    "transcriber_provider": "sarvam",
+    "synthesizer_characters": 5310,
+    "synthesizer_usage_breakdown": {
+      "provider_connected": false,
+      "welcome_message_cache": true,
+      "conversation_characters": 5310,
+      "welcome_message_characters": 0
+    },
+    "transcriber_usage_breakdown": {
+      "provider_connected": false,
+      "transcriber_duration": 179.8
+    },
+    "voicemail_detection_enabled": false,
+    "endpointing": 500,
+    "incremental_delay": 400,
+    "buffer_size": 250,
+    "hangup_after_silence": 20,
+    "check_if_user_online": true,
+    "trigger_user_online_message_after": 10
+  },
+  "cost_breakdown": {
+    "llm": 4.319,
+    "network": 1.5,
+    "platform": 6,
+    "synthesizer": 21.24,
+    "transcriber": 1.678,
+    "llm_breakdown": {
+      "hangup": 0.584,
+      "routing": 0,
+      "analytics": 0,
+      "voicemail": 0,
+      "extraction": 0,
+      "conversation": 3.735,
+      "summarization": 0
+    },
+    "transfer_cost": 0,
+    "total_cost_to_deduct": -9.237,
+    "synthesizer_breakdown": {
+      "conversation": 21.24,
+      "welcome_message": 0
+    },
+    "transcriber_breakdown": {
+      "analytics": 0,
+      "conversation": 1.678
+    }
+  },
+  "extracted_data": {},
+  "summary": null,
+  "error_message": null,
+  "status": "completed",
+  "agent_extraction": null,
+  "workflow_retries": null,
+  "rescheduled_at": null,
+  "custom_extractions": null,
+  "campaign_id": null,
+  "smart_status": null,
+  "user_number": "+917965480975",
+  "agent_number": "+918071580188",
+  "initiated_at": "2026-10-17T08:54:33.343931",
+  "retry_config": null,
+  "retry_count": 0,
+  "retry_history": null,
+  "agent_version_id": "0d391fe4-2e5a-49f2-b18a-d5396d7adef6",
+  "created_at": "2026-10-17T08:54:31.771031+00:00",
+  "updated_at": "2026-10-17T08:57:43.447147+00:00",
+  "processing_status": null,
+  "post_processing_phases": null,
+  "billing_settled": false,
+  "lid_data": null,
+  "telephony_data": {
+    "duration": 180,
+    "to_number": "+917965480975",
+    "from_number": "+918071580188",
+    "recording_url": "https://api.bolna.ai/recordings/call/3ee2277b-dae4-4a4f-b534-87ac6f047739",
+    "hosted_telephony": true,
+    "provider_call_id": "b9cd8618-97c5-4437-8317-d7666852adba",
+    "call_type": "outbound",
+    "provider": "vobiz",
+    "hangup_by": "Caller",
+    "hangup_reason": "Scheduled Hangup",
+    "hangup_provider_code": 6000,
+    "ring_duration": null,
+    "post_dial_delay": null,
+    "to_number_carrier": null
+  },
+  "transfer_call_data": null,
+  "context_details": {
+    "recipient_data": {
+      "goal": "Get a refund, or at least a callback, for a ₹500 consultation fee charged for an appointment the clinic cancelled.",
+      "seed_script": "1) Complaint with transaction ID T2410UPI88231. 2) Reject a generic apology. 3) Ask for a manager. 4) Accept a callback if given a time window. 5) Confirm your callback number.",
+      "target_name": "Sehat Clinic"
+    },
+    "recipient_phone_number": "+917965480975"
+  },
+  "agent_context_details": null,
+  "batch_run_details": null,
+  "provider": "vobiz",
+  "latency_data": {
+    "stream_id": 803.93604,
+    "time_to_first_audio": 807.45825,
+    "region": "in",
+    "transcriber": {
+      "time_to_connect": 16,
+      "turns": []
+    },
+    "llm": {
+      "time_to_connect": null,
+      "turns": [
+        {
+          "time_to_first_token": 344.1918,
+          "time_to_last_token": 698.76732,
+          "turn": 4
+        },
+        {
+          "time_to_first_token": 345.59436,
+          "time_to_last_token": 730.78585,
+          "turn": 5
+        },
+        {
+          "time_to_first_token": 392.14424,
+          "time_to_last_token": 826.23064,
+          "turn": 6
+        },
+        {
+          "time_to_first_token": 356.99279,
+          "time_to_last_token": 672.75617,
+          "turn": 7
+        },
+        {
+          "time_to_first_token": 355.69112,
+          "time_to_last_token": 694.42322,
+          "turn": 8
+        },
+        {
+          "time_to_first_token": 395.47853,
+          "time_to_last_token": 724.11631,
+          "turn": 9
+        },
+        {
+          "time_to_first_token": 366.90351,
+          "time_to_last_token": 568.70919,
+          "turn": 10
+        },
+        {
+          "time_to_first_token": 411.48764,
+          "time_to_last_token": 684.29418,
+          "turn": 11
+        },
+        {
+          "time_to_first_token": 380.64887,
+          "time_to_last_token": 647.02864,
+          "turn": 12
+        },
+        {
+          "time_to_first_token": 387.84226,
+          "time_to_last_token": 601.25199,
+          "turn": 13
+        },
+        {
+          "time_to_first_token": 399.47621,
+          "time_to_last_token": 573.75746,
+          "turn": 14
+        },
+        {
+          "time_to_first_token": 356.48569,
+          "time_to_last_token": 571.43654,
+          "turn": 15
+        },
+        {
+          "time_to_first_token": 351.42197,
+          "time_to_last_token": 585.92332,
+          "turn": 16
+        },
+        {
+          "time_to_first_token": 425.81748,
+          "time_to_last_token": 634.66398,
+          "turn": 17
+        },
+        {
+          "time_to_first_token": 344.25101,
+          "time_to_last_token": 573.24872,
+          "turn": 18
+        },
+        {
+          "time_to_first_token": 363.21445,
+          "time_to_last_token": 981.03302,
+          "turn": 19
+        },
+        {
+          "time_to_first_token": 386.70078,
+          "time_to_last_token": 667.71994,
+          "turn": 20
+        },
+        {
+          "time_to_first_token": 383.02548,
+          "time_to_last_token": 677.35436,
+          "turn": 21
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 22
+        },
+        {
+          "time_to_first_token": 419.04748,
+          "time_to_last_token": 816.78859,
+          "turn": 23
+        },
+        {
+          "time_to_first_token": 406.94053,
+          "time_to_last_token": 636.4407,
+          "turn": 24
+        },
+        {
+          "time_to_first_token": 379.77983,
+          "time_to_last_token": 535.83974,
+          "turn": 25
+        },
+        {
+          "time_to_first_token": 352.46316,
+          "time_to_last_token": 476.55866,
+          "turn": 26
+        },
+        {
+          "time_to_first_token": 333.15962,
+          "time_to_last_token": 476.95285,
+          "turn": 27
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 28
+        },
+        {
+          "time_to_first_token": 382.65867,
+          "time_to_last_token": 577.62396,
+          "turn": 29
+        },
+        {
+          "time_to_first_token": 378.2962,
+          "time_to_last_token": 543.08359,
+          "turn": 30
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 31
+        },
+        {
+          "time_to_first_token": 349.46882,
+          "time_to_last_token": 583.4968,
+          "turn": 32
+        },
+        {
+          "time_to_first_token": 353.61429,
+          "time_to_last_token": 671.13417,
+          "turn": 33
+        },
+        {
+          "time_to_first_token": 361.96258,
+          "time_to_last_token": 636.11038,
+          "turn": 34
+        },
+        {
+          "time_to_first_token": 422.84582,
+          "time_to_last_token": 612.65979,
+          "turn": 35
+        },
+        {
+          "time_to_first_token": 370.50083,
+          "time_to_last_token": 527.40128,
+          "turn": 36
+        },
+        {
+          "time_to_first_token": 379.92706,
+          "time_to_last_token": 472.68137,
+          "turn": 37
+        },
+        {
+          "time_to_first_token": 432.37113,
+          "time_to_last_token": 654.84423,
+          "turn": 38
+        },
+        {
+          "time_to_first_token": 386.59348,
+          "time_to_last_token": 516.70916,
+          "turn": 39
+        },
+        {
+          "time_to_first_token": 409.22626,
+          "time_to_last_token": 654.73475,
+          "turn": 40
+        },
+        {
+          "time_to_first_token": 418.53598,
+          "time_to_last_token": 748.77675,
+          "turn": 41
+        },
+        {
+          "time_to_first_token": 371.84196,
+          "time_to_last_token": 533.68511,
+          "turn": 43
+        },
+        {
+          "time_to_first_token": 396.7606,
+          "time_to_last_token": 489.56598,
+          "turn": 44
+        },
+        {
+          "time_to_first_token": 493.48348,
+          "time_to_last_token": 751.3934,
+          "turn": 45
+        },
+        {
+          "time_to_first_token": 439.80661,
+          "time_to_last_token": 557.6506,
+          "turn": 46
+        },
+        {
+          "time_to_first_token": 411.48182,
+          "time_to_last_token": 495.25986,
+          "turn": 47
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 48
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 49
+        },
+        {
+          "time_to_first_token": 422.27265,
+          "time_to_last_token": 630.27618,
+          "turn": 50
+        },
+        {
+          "time_to_first_token": 441.47608,
+          "time_to_last_token": 665.83075,
+          "turn": 51
+        },
+        {
+          "time_to_first_token": 375.62909,
+          "time_to_last_token": 587.00584,
+          "turn": 52
+        },
+        {
+          "time_to_first_token": 393.13959,
+          "time_to_last_token": 605.94502,
+          "turn": 53
+        },
+        {
+          "time_to_first_token": 386.96874,
+          "time_to_last_token": 608.95152,
+          "turn": 54
+        },
+        {
+          "time_to_first_token": 515.29562,
+          "time_to_last_token": 790.60604,
+          "turn": 55
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 56
+        },
+        {
+          "time_to_first_token": 444.52798,
+          "time_to_last_token": 686.10928,
+          "turn": 57
+        },
+        {
+          "time_to_first_token": 403.79095,
+          "time_to_last_token": 551.85817,
+          "turn": 58
+        },
+        {
+          "time_to_first_token": 374.36209,
+          "time_to_last_token": 521.94388,
+          "turn": 59
+        },
+        {
+          "time_to_first_token": 443.59367,
+          "time_to_last_token": 706.13073,
+          "turn": 60
+        },
+        {
+          "time_to_first_token": 405.03979,
+          "time_to_last_token": 692.9399,
+          "turn": 61
+        },
+        {
+          "time_to_first_token": 395.99827,
+          "time_to_last_token": 614.0725,
+          "turn": 62
+        },
+        {
+          "time_to_first_token": 425.17738,
+          "time_to_last_token": 522.31536,
+          "turn": 63
+        },
+        {
+          "time_to_first_token": 443.29245,
+          "time_to_last_token": 659.40244,
+          "turn": 64
+        },
+        {
+          "time_to_first_token": 408.02995,
+          "time_to_last_token": 541.47216,
+          "turn": 65
+        },
+        {
+          "time_to_first_token": 451.03203,
+          "time_to_last_token": 594.32668,
+          "turn": 66
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 67
+        },
+        {
+          "time_to_first_token": 410.70396,
+          "time_to_last_token": 522.31918,
+          "turn": 68
+        }
+      ]
+    },
+    "synthesizer": {
+      "time_to_connect": 21,
+      "turns": [
+        {
+          "time_to_first_token": 5,
+          "time_to_last_token": 2204,
+          "turn": 4
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 5
+        },
+        {
+          "time_to_first_token": 278,
+          "time_to_last_token": 2762,
+          "turn": 6
+        },
+        {
+          "time_to_first_token": 264,
+          "time_to_last_token": 2286,
+          "turn": 7
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 8
+        },
+        {
+          "time_to_first_token": 265,
+          "time_to_last_token": 2447,
+          "turn": 9
+        },
+        {
+          "time_to_first_token": 263,
+          "time_to_last_token": 857,
+          "turn": 10
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 11
+        },
+        {
+          "time_to_first_token": 265,
+          "time_to_last_token": 1399,
+          "turn": 12
+        },
+        {
+          "time_to_first_token": 290,
+          "time_to_last_token": 1159,
+          "turn": 13
+        },
+        {
+          "time_to_first_token": 297,
+          "time_to_last_token": 1017,
+          "turn": 14
+        },
+        {
+          "time_to_first_token": 263,
+          "time_to_last_token": 1025,
+          "turn": 15
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 16
+        },
+        {
+          "time_to_first_token": 2322,
+          "time_to_last_token": 3909,
+          "turn": 17
+        },
+        {
+          "time_to_first_token": 238,
+          "time_to_last_token": 985,
+          "turn": 18
+        },
+        {
+          "time_to_first_token": 262,
+          "time_to_last_token": 2582,
+          "turn": 19
+        },
+        {
+          "time_to_first_token": 263,
+          "time_to_last_token": 2166,
+          "turn": 20
+        },
+        {
+          "time_to_first_token": 295,
+          "time_to_last_token": 1639,
+          "turn": 21
+        },
+        {
+          "time_to_first_token": 263,
+          "time_to_last_token": 2328,
+          "turn": 23
+        },
+        {
+          "time_to_first_token": 266,
+          "time_to_last_token": 1250,
+          "turn": 24
+        },
+        {
+          "time_to_first_token": 260,
+          "time_to_last_token": 980,
+          "turn": 25
+        },
+        {
+          "time_to_first_token": 265,
+          "time_to_last_token": 735,
+          "turn": 26
+        },
+        {
+          "time_to_first_token": 270,
+          "time_to_last_token": 1041,
+          "turn": 27
+        },
+        {
+          "time_to_first_token": 262,
+          "time_to_last_token": 1134,
+          "turn": 29
+        },
+        {
+          "time_to_first_token": 264,
+          "time_to_last_token": 933,
+          "turn": 30
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 32
+        },
+        {
+          "time_to_first_token": 261,
+          "time_to_last_token": 2296,
+          "turn": 33
+        },
+        {
+          "time_to_first_token": 58,
+          "time_to_last_token": 570,
+          "turn": 34
+        },
+        {
+          "time_to_first_token": 98,
+          "time_to_last_token": 453,
+          "turn": 35
+        },
+        {
+          "time_to_first_token": 267,
+          "time_to_last_token": 763,
+          "turn": 36
+        },
+        {
+          "time_to_first_token": 264,
+          "time_to_last_token": 545,
+          "turn": 37
+        },
+        {
+          "time_to_first_token": 260,
+          "time_to_last_token": 914,
+          "turn": 38
+        },
+        {
+          "time_to_first_token": 264,
+          "time_to_last_token": 999,
+          "turn": 39
+        },
+        {
+          "time_to_first_token": 262,
+          "time_to_last_token": 1358,
+          "turn": 40
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 41
+        },
+        {
+          "time_to_first_token": 261,
+          "time_to_last_token": 1987,
+          "turn": 43
+        },
+        {
+          "time_to_first_token": 265,
+          "time_to_last_token": 607,
+          "turn": 44
+        },
+        {
+          "time_to_first_token": 260,
+          "time_to_last_token": 1916,
+          "turn": 45
+        },
+        {
+          "time_to_first_token": 352,
+          "time_to_last_token": 947,
+          "turn": 46
+        },
+        {
+          "time_to_first_token": 264,
+          "time_to_last_token": 426,
+          "turn": 47
+        },
+        {
+          "time_to_first_token": 263,
+          "time_to_last_token": 824,
+          "turn": 50
+        },
+        {
+          "time_to_first_token": 265,
+          "time_to_last_token": 1125,
+          "turn": 51
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 52
+        },
+        {
+          "time_to_first_token": 260,
+          "time_to_last_token": 1201,
+          "turn": 53
+        },
+        {
+          "time_to_first_token": 289,
+          "time_to_last_token": 1158,
+          "turn": 54
+        },
+        {
+          "time_to_first_token": 402,
+          "time_to_last_token": 2495,
+          "turn": 55
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 57
+        },
+        {
+          "time_to_first_token": 278,
+          "time_to_last_token": 1954,
+          "turn": 58
+        },
+        {
+          "time_to_first_token": 83,
+          "time_to_last_token": 794,
+          "turn": 59
+        },
+        {
+          "time_to_first_token": 77,
+          "time_to_last_token": 1351,
+          "turn": 60
+        },
+        {
+          "time_to_first_token": 23,
+          "time_to_last_token": 1170,
+          "turn": 61
+        },
+        {
+          "time_to_first_token": 268,
+          "time_to_last_token": 2033,
+          "turn": 62
+        },
+        {
+          "time_to_first_token": 258,
+          "time_to_last_token": 541,
+          "turn": 63
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 64
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 65
+        },
+        {
+          "time_to_first_token": 2797,
+          "time_to_last_token": 4306,
+          "turn": 66
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 68
+        }
+      ]
+    },
+    "rag": null,
+    "interruption_stats": {
+      "user_speaking_ms": 134,
+      "agent_speaking_ms": 36986,
+      "total_interruptions": 40,
+      "talk_to_listen_ratio": 99.6,
+      "barge_in_recovery_rate": 60,
+      "barge_in_recovery_count": 24,
+      "longest_agent_monologue_ms": 2297,
+      "agent_interrupted_user_count": 0,
+      "user_interrupted_agent_count": 40
+    }
+  },
+  "tool_call_logs": [],
+  "node_extracted_data": null
+}

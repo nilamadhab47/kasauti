@@ -1,0 +1,45 @@
+---
+description: Kasauti project rules. Read before every task.
+alwaysApply: true
+---
+
+# Kasauti: rules for the AI agent
+
+Kasauti is a crash tester for voice agents. Synthetic Indian callers (Bolna voice agents) phone a target voice agent, and a judge (Jev) scores each call into a red/amber/green report card.
+
+## 1. THE GATE: Phase 0 comes before everything
+
+The whole project rests on one unproven assumption: **a Bolna agent can phone another voice agent and the two can hold a usable conversation.**
+
+Before doing ANY task, check whether `docs/phase0-results.md` exists and contains the line `Verdict: GO`.
+
+**While the gate is closed** (the file is missing, or the verdict is not GO):
+- Work ONLY in `scripts/`, `personas/`, `demo-target/`, `docs/`, `runs/`, `fixtures/` and root config (`package.json`, `tsconfig.json`, `.env.example`, `.gitignore`).
+- Do NOT create `apps/` or `packages/`, database schemas, migrations, ORMs, queues, UI, servers, Dockerfiles or deploy config.
+- Follow `docs/PHASE0_SMOKE_TEST.md` step by step, in order. Don't skip ahead.
+- If the user asks for app code while the gate is closed, say once: "Phase 0 hasn't passed yet (docs/phase0-results.md has no GO). Build it anyway?" Proceed only if they say yes.
+
+**Once the gate is open:** follow the milestones in `docs/TECH_SPEC.md` §2 in order.
+
+## 2. Sources of truth
+- Product: `docs/PRODUCT_SPEC.md`
+- Technical: `docs/TECH_SPEC.md`
+- Phase 0 test: `docs/PHASE0_SMOKE_TEST.md`
+- Background research and all six persona prompts: `docs/ORIGINAL_SPEC.md`
+- Bolna API: https://www.bolna.ai/docs/llms.txt. Read the relevant doc page before writing any Bolna request. **Never invent endpoints or fields.** Anything marked ⚠️ in the specs is unverified: check the docs, and if they're unclear, write the code so the value is easy to change and leave a `// ⚠️ unverified:` comment.
+
+## 3. Safety and cost rules (non-negotiable)
+- Only dial numbers listed in `.env` as `ALLOWED_NUMBERS` (comma-separated E.164). Every script that places a call must refuse any other number.
+- In Phase 0, place at most one call per script run. No loops that dial.
+- Never print or log `BOLNA_API_KEY` or any other secret. Secrets live only in `.env` (gitignored).
+- Persona prompts contain no profanity, slurs or threats (Bolna's content filter blocks them). Anger shows through tone and repetition only.
+- Only call bots the user owns or has written permission to call.
+
+## 4. Code conventions
+- TypeScript, Node 20+, pnpm, ESM, `"strict": true`. Run scripts with `tsx`.
+- Use plain `fetch` for HTTP. No axios.
+- Validate every external response with `zod`, using `.passthrough()` so unknown Bolna fields are kept, not dropped.
+- Save every raw API response to `runs/` as JSON. Raw data is the evidence; never throw it away.
+- Small, boring, explicit code. No new dependency without a one-line reason in the commit message.
+- Hindi in prompts is **Devanagari**; English words stay in Latin script. Don't romanise Hindi and don't "correct" Hinglish.
+- Unit tests use `vitest`. Real call outputs copied into `fixtures/` become test fixtures.

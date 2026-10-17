@@ -1,0 +1,706 @@
+{
+  "id": "9581a1ff-77bf-4594-b787-12a194dc7258",
+  "agent_id": "7c86a6ce-7ad4-48d6-9ac4-0e767d06cb14",
+  "batch_id": null,
+  "scheduled_at": null,
+  "answered_by_voice_mail": null,
+  "conversation_duration": 174,
+  "total_cost": 18,
+  "transcript": "assistant: हेलो? हाँ, हेलो? Clinic से बात हो रही है?\nuser: हाउ कैन आई हेल्प यू?\nassistant: देखिए, मेरा पैसा\nuser: मे आई हैव योर नेम प्लीज़?\nassistant: हाँ हाँ, नाम\nuser: और आप बुक एक अपॉइंटमेंट के लिए चाह रहे हैं? और स्पेसिफिक। डॉक्टर।\nuser: और यू हैव अ हेल्थ कैर?\nassistant: नहीं-नहीं, मैं बात कर रहा हूँ मेरा पैसा ₹500 कटा है, UPI से, और appointment आपने cancel कर दिया। Transaction ID\nuser: हेल्थ कंसर्न यू वुड लाइक टू जस्ट जिसका।\nassistant: देखिए, बात ये है कि मैंने appointment cancel किया ही नहीं, आपने किया। फिर भी पैसा\nuser: प्लीज टेल मी द डॉक्टर्स नेम यू लाइक टू सी और द हेल्थ इशू यू आर एक्सपीरियंस कर रहे हो। और एक्सपीरियंसिंग। कौन?\nuser: आई कैन हेल्प विद दैट।\nassistant: नहीं-नहीं, मैं डॉक्टर नहीं देखना\nuser: टू कन्फर्म यू लाइक टू कैंसिल अपॉइंटमेंट आईडी 41 करेक्ट?\nassistant: नहीं, मैं कैंसिल\nuser: थैंक यू फॉर कन्फर्मिंग।\nassistant: देखिए, मेरा पैसा कटा है, ₹500, UPI से, और appointment आपने cancel कर\nuser: आई हैव कैंसिल्ड अपॉइंटमेंट आईडी 241 फॉर यू।\nuser: इज देयर एनीथिंग एल्स आई कैन असिस्ट यू विद टुडे?\nassistant: नहीं-नहीं, बात ये है कि आपने appointment cancel किया, फिर भी पैसा कटा है।\nuser: आई सी यू मेंशन द ट्रांजैक्शन आईडी।\nassistant: हाँ हाँ, नोट कीजिए…\nuser: कुड यू प्लीज क्लेरिफाई?\nuser: इफ यू नीड हेल्प विथ अ पैन।\nassistant: हाँ\nuser: इफ यू नीड एनी हेल्प विथ।\nuser: बुकिंग और अदर सर्विसेज।\nuser: फील फ्री टू आस्क।\nuser: हैव अ ग्रेट डे।\nassistant: देखिए, मैंने कहा था, ट्रांजैक्शन\nuser: प्लीज क्लेरिफाई व्हाट यू मीन बाय वन।\nuser: आर यू लुकिंग टू बुक अ न्यू एप्रोडक्ट? न्यू अपॉइंटमेंट।\nuser: और नीड असिस्टेंस व समथिंग एल।\nassistant: नहीं, मैं booking के लिए नहीं हूँ, मेरा पैसा कटा है, Transaction ID T2410UPI88231 है। आप बताइए,\nuser: आई एम हियर टू हेल्प।\nuser: कुड यू प्लीज टेल मी योर नेम?\nassistant: मैं शर्मा जी बोल रहा हूँ, नाम याद रखिए। मेरा पैसा कटा\nuser: एंड इफ यू लाइक टू बुक एन अपॉइंटमेंट और नीड असिस्टेंस।\nuser: कुछ में कुछ में।\nassistant:  नहीं, मैं appointment बुक करना नहीं चाहता, मेरा complaint है कि ₹500 कटा है appointment cancel होने पर। आप manager से बात कराइए।\nuser: आई एम सॉरी टू हियर यू हैव अ कंप्लेंट।\nassistant: Sorry-वॉरी मत\nuser: कुड यू प्लीज शेयर मोर डिटेल्स अबाउट द इशू?\nassistant: हाँ हाँ, नोट\nuser: आल्सो इफ यू वांट टू बुक एन अपॉइंटमेंट।\nuser: प्लीज प्रोवाइड योर नेम।\nassistant: नहीं, मेरी complaint सुनिए, Transaction\nuser: क्या यू पर पर\nassistant: देखिए, मेरा पैसा ₹500\nuser: थैंक यू फॉर द डिटेल।\nassistant: देखिए, appointment आपके\nuser: सिस्ट यू बेटर कुड यू प्लीज प्रोवाइड योर नेम\nassistant: मैं शर्मा जी बोल रहा\nuser: एंड द प्रेफर्ड डेट एंड टाइम फॉर द अपॉइंटमेंट।\nassistant:  नहीं, मुझे appointment नहीं चाहिए, मेरा पैसा वापस चाहिए जो आपने cancel करने के बाद भी काट लिया।\nuser: श्योर।\nuser: मे आई हैव योर नेम प्लीज़\nassistant: मैं शर्मा जी, Delhi से\nuser: डॉक्टर और हेल्थ इशू इज द अपॉइंटमेंट फॉर।\nuser: और योर प्रेफर्ड डेट। डेट एंड टाइम।\nassistant:  देखिए, वो matter नहीं है, appointment तो आपने cancel किया, पैसा ₹500 वापस कब मिलेगा?\nuser: थैंक यू।\nassistant: आप मुझे\nuser: कुड यू प्लीज आल्सो टेल मी योर नेम?\nassistant: मैं\nuser: द डॉक्टर यूड लाइक टू सी। और द हेल्थ। हेल्थ इशू।\nassistant: नहीं, मैं\nuser: एंड योर प्रेफर्ड डेट एंड टाइम फॉर द अपॉइंटमेंट।\nassistant:  मुझे appointment नहीं चाहिए, मेरा ₹500 refund कब होगा?\nuser: आई कैन चेक।\nuser: चेक दैट फॉर यू।\nassistant:  धन्यवाद, कृपया जल्दी बताइए कब refund होगा।\nuser: कुड यू प्लीज प्रोवाइड योर नेम और द अपॉइंटमेंट आईडी रिलेटेड टू द रिफंड\nassistant:  हाँ हाँ, नाम शर्मा जी, और Transaction ID T2410UPI88231 है, लिख लीजिए।\nuser: थैंक यू फॉर द ट्रांजैक्शन आईडी।\nassistant: देखिए, अब बताइए refund कब आएगा? Exact\nuser: आई विल चेक द रिफंड स्टेटस फॉर अपॉइंटमेंट आईडी 241।\nassistant: अच्छा? कब किया? मुझे तो\nuser: टी टू फोर वन से यू पी आई।\nassistant: अच्छा? कब\nuser: प्लीज होल्ड ऑन अ मोमेंट।\nassistant:  ठीक है, लेकिन जल्दी बताइए, refund कब आएगा?\nuser: द कॉल विल नाउ डिस्क कर देगा। डिस्कनेक्ट। गुड बाय।\n",
+  "usage_breakdown": {
+    "llmModel": {
+      "gpt-4.1-mini": {
+        "input": 69686,
+        "output": 1507
+      }
+    },
+    "voice_id": "shubh_enhi_banking",
+    "llmTokens": 0,
+    "provider_source": {
+      "llm": "bolna",
+      "synthesizer": "bolna",
+      "transcriber": "bolna"
+    },
+    "synthesizer_model": "bulbul:v4-flash",
+    "transcriber_model": "saaras:v3",
+    "llm_usage_breakdown": {
+      "hangup": {
+        "input": 32024,
+        "model": "gpt-4o-mini",
+        "output": 360,
+        "provider": "openai",
+        "provider_connected": false
+      },
+      "analytics": null,
+      "extraction": null,
+      "disposition": {
+        "input": 0,
+        "model": null,
+        "output": 0,
+        "cached_tokens": 0,
+        "llm_key_source": []
+      },
+      "conversation": {
+        "input": 69686,
+        "model": "gpt-4.1-mini",
+        "output": 1507,
+        "provider": "openai",
+        "routing_target": null,
+        "provider_connected": false
+      },
+      "summarization": null
+    },
+    "synthesizer_provider": "sarvam",
+    "transcriber_duration": 174.2,
+    "transcriber_language": "hi",
+    "transcriber_provider": "sarvam",
+    "synthesizer_characters": 4992,
+    "synthesizer_usage_breakdown": {
+      "provider_connected": false,
+      "welcome_message_cache": true,
+      "conversation_characters": 4992,
+      "welcome_message_characters": 0
+    },
+    "transcriber_usage_breakdown": {
+      "provider_connected": false,
+      "transcriber_duration": 174.2
+    },
+    "voicemail_detection_enabled": false,
+    "endpointing": 500,
+    "incremental_delay": 400,
+    "buffer_size": 250,
+    "hangup_after_silence": 20,
+    "check_if_user_online": true,
+    "trigger_user_online_message_after": 10
+  },
+  "cost_breakdown": {
+    "llm": 3.548,
+    "network": 1.5,
+    "platform": 6,
+    "synthesizer": 19.968,
+    "transcriber": 1.626,
+    "llm_breakdown": {
+      "hangup": 0.518,
+      "routing": 0,
+      "analytics": 0,
+      "voicemail": 0,
+      "extraction": 0,
+      "conversation": 3.03,
+      "summarization": 0
+    },
+    "transfer_cost": 0,
+    "total_cost_to_deduct": -7.142,
+    "synthesizer_breakdown": {
+      "conversation": 19.968,
+      "welcome_message": 0
+    },
+    "transcriber_breakdown": {
+      "analytics": 0,
+      "conversation": 1.626
+    }
+  },
+  "extracted_data": {},
+  "summary": null,
+  "error_message": null,
+  "status": "completed",
+  "agent_extraction": null,
+  "workflow_retries": null,
+  "rescheduled_at": null,
+  "custom_extractions": null,
+  "campaign_id": null,
+  "smart_status": null,
+  "user_number": "+917965480975",
+  "agent_number": "+918071580188",
+  "initiated_at": "2026-10-17T08:42:18.167252",
+  "retry_config": null,
+  "retry_count": 0,
+  "retry_history": null,
+  "agent_version_id": "0d391fe4-2e5a-49f2-b18a-d5396d7adef6",
+  "created_at": "2026-10-17T08:42:17.530684+00:00",
+  "updated_at": "2026-10-17T08:45:27.494540+00:00",
+  "processing_status": null,
+  "post_processing_phases": null,
+  "billing_settled": false,
+  "lid_data": null,
+  "telephony_data": {
+    "duration": 174,
+    "to_number": "+917965480975",
+    "from_number": "+918071580188",
+    "recording_url": "https://api.bolna.ai/recordings/call/9581a1ff-77bf-4594-b787-12a194dc7258",
+    "hosted_telephony": true,
+    "provider_call_id": "8a01b5c0-f85c-4641-811f-cbae8a1c746b",
+    "call_type": "outbound",
+    "provider": "vobiz",
+    "hangup_by": "Callee",
+    "hangup_reason": "Call recipient hungup",
+    "hangup_provider_code": 4000,
+    "ring_duration": null,
+    "post_dial_delay": null,
+    "to_number_carrier": null
+  },
+  "transfer_call_data": null,
+  "context_details": {
+    "recipient_data": {
+      "goal": "Get a refund, or at least a callback, for a ₹500 consultation fee charged for an appointment the clinic cancelled.",
+      "seed_script": "1) Complaint with transaction ID T2410UPI88231. 2) Reject a generic apology. 3) Ask for a manager. 4) Accept a callback if given a time window. 5) Confirm your callback number.",
+      "target_name": "Sehat Clinic"
+    },
+    "recipient_phone_number": "+917965480975"
+  },
+  "agent_context_details": null,
+  "batch_run_details": null,
+  "provider": "vobiz",
+  "latency_data": {
+    "stream_id": 805.57349,
+    "time_to_first_audio": 808.09692,
+    "region": "in",
+    "transcriber": {
+      "time_to_connect": 18,
+      "turns": []
+    },
+    "llm": {
+      "time_to_connect": null,
+      "turns": [
+        {
+          "time_to_first_token": 394.30159,
+          "time_to_last_token": 841.08916,
+          "turn": 3
+        },
+        {
+          "time_to_first_token": 362.15332,
+          "time_to_last_token": 878.33829,
+          "turn": 4
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 5
+        },
+        {
+          "time_to_first_token": 340.30906,
+          "time_to_last_token": 744.27526,
+          "turn": 7
+        },
+        {
+          "time_to_first_token": 351.33165,
+          "time_to_last_token": 769.30213,
+          "turn": 8
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 9
+        },
+        {
+          "time_to_first_token": 369.11902,
+          "time_to_last_token": 864.60466,
+          "turn": 10
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 11
+        },
+        {
+          "time_to_first_token": 415.52995,
+          "time_to_last_token": 657.41301,
+          "turn": 13
+        },
+        {
+          "time_to_first_token": 338.5751,
+          "time_to_last_token": 634.18803,
+          "turn": 14
+        },
+        {
+          "time_to_first_token": 383.07038,
+          "time_to_last_token": 752.03695,
+          "turn": 15
+        },
+        {
+          "time_to_first_token": 465.93851,
+          "time_to_last_token": 691.6853,
+          "turn": 16
+        },
+        {
+          "time_to_first_token": 340.52703,
+          "time_to_last_token": 770.48115,
+          "turn": 17
+        },
+        {
+          "time_to_first_token": 349.56952,
+          "time_to_last_token": 575.30608,
+          "turn": 18
+        },
+        {
+          "time_to_first_token": 367.34061,
+          "time_to_last_token": 790.9655,
+          "turn": 19
+        },
+        {
+          "time_to_first_token": 386.51847,
+          "time_to_last_token": 757.9773,
+          "turn": 20
+        },
+        {
+          "time_to_first_token": 348.40323,
+          "time_to_last_token": 526.61145,
+          "turn": 21
+        },
+        {
+          "time_to_first_token": 375.50777,
+          "time_to_last_token": 857.9482,
+          "turn": 22
+        },
+        {
+          "time_to_first_token": 372.99428,
+          "time_to_last_token": 661.39062,
+          "turn": 23
+        },
+        {
+          "time_to_first_token": 354.63478,
+          "time_to_last_token": 708.33318,
+          "turn": 24
+        },
+        {
+          "time_to_first_token": 536.93824,
+          "time_to_last_token": 916.89031,
+          "turn": 25
+        },
+        {
+          "time_to_first_token": 388.7813,
+          "time_to_last_token": 741.25626,
+          "turn": 26
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 27
+        },
+        {
+          "time_to_first_token": 383.65382,
+          "time_to_last_token": 812.69834,
+          "turn": 28
+        },
+        {
+          "time_to_first_token": 387.76494,
+          "time_to_last_token": 733.4335,
+          "turn": 29
+        },
+        {
+          "time_to_first_token": 407.20009,
+          "time_to_last_token": 583.46273,
+          "turn": 30
+        },
+        {
+          "time_to_first_token": 387.9537,
+          "time_to_last_token": 650.81048,
+          "turn": 31
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 32
+        },
+        {
+          "time_to_first_token": 402.14597,
+          "time_to_last_token": 682.73418,
+          "turn": 33
+        },
+        {
+          "time_to_first_token": 391.0184,
+          "time_to_last_token": 543.73421,
+          "turn": 34
+        },
+        {
+          "time_to_first_token": 393.28374,
+          "time_to_last_token": 640.25374,
+          "turn": 35
+        },
+        {
+          "time_to_first_token": 428.72558,
+          "time_to_last_token": 685.08455,
+          "turn": 36
+        },
+        {
+          "time_to_first_token": 406.61581,
+          "time_to_last_token": 680.36277,
+          "turn": 37
+        },
+        {
+          "time_to_first_token": 379.3469,
+          "time_to_last_token": 590.07948,
+          "turn": 38
+        },
+        {
+          "time_to_first_token": 561.42807,
+          "time_to_last_token": 751.24911,
+          "turn": 39
+        },
+        {
+          "time_to_first_token": 375.31153,
+          "time_to_last_token": 555.60153,
+          "turn": 40
+        },
+        {
+          "time_to_first_token": 385.05774,
+          "time_to_last_token": 564.53557,
+          "turn": 41
+        },
+        {
+          "time_to_first_token": 378.56041,
+          "time_to_last_token": 559.29836,
+          "turn": 42
+        },
+        {
+          "time_to_first_token": 545.6675,
+          "time_to_last_token": 689.14457,
+          "turn": 43
+        },
+        {
+          "time_to_first_token": 413.01515,
+          "time_to_last_token": 633.41494,
+          "turn": 44
+        },
+        {
+          "time_to_first_token": 450.31715,
+          "time_to_last_token": 681.33679,
+          "turn": 45
+        },
+        {
+          "time_to_first_token": 461.86748,
+          "time_to_last_token": 629.15,
+          "turn": 46
+        },
+        {
+          "time_to_first_token": 374.92503,
+          "time_to_last_token": 490.09363,
+          "turn": 47
+        },
+        {
+          "time_to_first_token": 452.97997,
+          "time_to_last_token": 625.3792,
+          "turn": 48
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 49
+        },
+        {
+          "time_to_first_token": 391.78797,
+          "time_to_last_token": 509.51968,
+          "turn": 51
+        },
+        {
+          "time_to_first_token": 655.42771,
+          "time_to_last_token": 802.40905,
+          "turn": 52
+        },
+        {
+          "time_to_first_token": 419.92916,
+          "time_to_last_token": 543.40311,
+          "turn": 53
+        },
+        {
+          "time_to_first_token": 401.69752,
+          "time_to_last_token": 538.42101,
+          "turn": 54
+        },
+        {
+          "time_to_first_token": 410.11774,
+          "time_to_last_token": 611.66344,
+          "turn": 55
+        },
+        {
+          "time_to_first_token": 374.86347,
+          "time_to_last_token": 488.65692,
+          "turn": 56
+        },
+        {
+          "time_to_first_token": 417.89603,
+          "time_to_last_token": 530.67955,
+          "turn": 57
+        },
+        {
+          "time_to_first_token": 411.41409,
+          "time_to_last_token": 536.33212,
+          "turn": 58
+        },
+        {
+          "time_to_first_token": 388.73208,
+          "time_to_last_token": 505.87091,
+          "turn": 59
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 60
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 61
+        }
+      ]
+    },
+    "synthesizer": {
+      "time_to_connect": 22,
+      "turns": [
+        {
+          "time_to_first_token": 10,
+          "time_to_last_token": 2663,
+          "turn": 3
+        },
+        {
+          "time_to_first_token": 279,
+          "time_to_last_token": 3253,
+          "turn": 4
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 7
+        },
+        {
+          "time_to_first_token": 282,
+          "time_to_last_token": 2371,
+          "turn": 8
+        },
+        {
+          "time_to_first_token": 65,
+          "time_to_last_token": 1561,
+          "turn": 10
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 13
+        },
+        {
+          "time_to_first_token": 270,
+          "time_to_last_token": 2172,
+          "turn": 14
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 15
+        },
+        {
+          "time_to_first_token": 260,
+          "time_to_last_token": 2975,
+          "turn": 16
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 17
+        },
+        {
+          "time_to_first_token": 3152,
+          "time_to_last_token": 3366,
+          "turn": 18
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 19
+        },
+        {
+          "time_to_first_token": 272,
+          "time_to_last_token": 2415,
+          "turn": 20
+        },
+        {
+          "time_to_first_token": 61,
+          "time_to_last_token": 2709,
+          "turn": 21
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 22
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 23
+        },
+        {
+          "time_to_first_token": 247,
+          "time_to_last_token": 2141,
+          "turn": 24
+        },
+        {
+          "time_to_first_token": 24,
+          "time_to_last_token": 1231,
+          "turn": 25
+        },
+        {
+          "time_to_first_token": 119,
+          "time_to_last_token": 1835,
+          "turn": 26
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 28
+        },
+        {
+          "time_to_first_token": 126,
+          "time_to_last_token": 2432,
+          "turn": 29
+        },
+        {
+          "time_to_first_token": 105,
+          "time_to_last_token": 674,
+          "turn": 30
+        },
+        {
+          "time_to_first_token": 69,
+          "time_to_last_token": 429,
+          "turn": 31
+        },
+        {
+          "time_to_first_token": 260,
+          "time_to_last_token": 1412,
+          "turn": 33
+        },
+        {
+          "time_to_first_token": 265,
+          "time_to_last_token": 1745,
+          "turn": 34
+        },
+        {
+          "time_to_first_token": 267,
+          "time_to_last_token": 2471,
+          "turn": 35
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 36
+        },
+        {
+          "time_to_first_token": 265,
+          "time_to_last_token": 2233,
+          "turn": 37
+        },
+        {
+          "time_to_first_token": 272,
+          "time_to_last_token": 1382,
+          "turn": 38
+        },
+        {
+          "time_to_first_token": 271,
+          "time_to_last_token": 992,
+          "turn": 39
+        },
+        {
+          "time_to_first_token": 276,
+          "time_to_last_token": 802,
+          "turn": 40
+        },
+        {
+          "time_to_first_token": 277,
+          "time_to_last_token": 1040,
+          "turn": 41
+        },
+        {
+          "time_to_first_token": 267,
+          "time_to_last_token": 810,
+          "turn": 42
+        },
+        {
+          "time_to_first_token": 269,
+          "time_to_last_token": 2102,
+          "turn": 43
+        },
+        {
+          "time_to_first_token": 277,
+          "time_to_last_token": 894,
+          "turn": 44
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 45
+        },
+        {
+          "time_to_first_token": 264,
+          "time_to_last_token": 2098,
+          "turn": 46
+        },
+        {
+          "time_to_first_token": 268,
+          "time_to_last_token": 618,
+          "turn": 47
+        },
+        {
+          "time_to_first_token": 280,
+          "time_to_last_token": 911,
+          "turn": 48
+        },
+        {
+          "time_to_first_token": 279,
+          "time_to_last_token": 819,
+          "turn": 51
+        },
+        {
+          "time_to_first_token": 262,
+          "time_to_last_token": 739,
+          "turn": 52
+        },
+        {
+          "time_to_first_token": null,
+          "time_to_last_token": null,
+          "turn": 53
+        },
+        {
+          "time_to_first_token": 281,
+          "time_to_last_token": 591,
+          "turn": 54
+        },
+        {
+          "time_to_first_token": 274,
+          "time_to_last_token": 1635,
+          "turn": 55
+        },
+        {
+          "time_to_first_token": 277,
+          "time_to_last_token": 795,
+          "turn": 56
+        },
+        {
+          "time_to_first_token": 293,
+          "time_to_last_token": 734,
+          "turn": 57
+        },
+        {
+          "time_to_first_token": 278,
+          "time_to_last_token": 768,
+          "turn": 58
+        },
+        {
+          "time_to_first_token": 270,
+          "time_to_last_token": 568,
+          "turn": 59
+        }
+      ]
+    },
+    "rag": null,
+    "interruption_stats": {
+      "user_speaking_ms": 115,
+      "agent_speaking_ms": 32056,
+      "total_interruptions": 34,
+      "talk_to_listen_ratio": 99.6,
+      "barge_in_recovery_rate": 61.8,
+      "barge_in_recovery_count": 21,
+      "longest_agent_monologue_ms": 2279,
+      "agent_interrupted_user_count": 0,
+      "user_interrupted_agent_count": 34
+    }
+  },
+  "tool_call_logs": [],
+  "node_extracted_data": null
+}

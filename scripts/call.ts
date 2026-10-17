@@ -1,0 +1,122 @@
+import { appendFile, mkdir, readFile } from "node:fs/promises";
+import { join } from "node:path";
+import { bolna } from "./lib/bolna.js";
+import { env, repoRoot } from "./lib/env.js";
+
+const TERMINAL = new Set(["completed", "no-answer", "busy", "failed", "canceled", "cancelled", "stopped", "error", "balance-low"]);
+const TIMEOUT_MS = 8 * 60 * 1000;
+
+const args = parseArgs(process.argv.slice(2));
+const to = args.to;
+if (!to) {
+  console.error("usage: pnpm call -- --to +91XXXXXXXXXX [--agent <id>] [--label <text>]");
+  process.exit(1);
+}
+if (!env.ALLOWED_NUMBERS.includes(to)) {
+  console.error("Refusing to dial a number that is not in ALLOWED_NUMBERS.");
+  process.exit(1);
+}
+
+const agentId = args.agent ?? env.PERSONA_AGENT_ID;
+if (!agentId) {
+  console.error("No agent id. Pass --agent or set PERSONA_AGENT_ID.");
+  process.exit(1);
+}
+
+const defaults = JSON.parse(await readFile(join(repoRoot, "personas/angry_uncle/defaults.json"), "utf8")) as {
+  user_data: Record<string, string>;
+};
+
+const placed = await bolna("POST", "/call", {
+  agent_id: agentId,
+  recipient_phone_number: to,
+  user_data: defaults.user_data,
+  bypass_call_guardrails: true,
+});
+const placedRecord = asRecord(placed);
+const executionId = stringField(placedRecord, "execution_id");
+if (!executionId) {
+  console.error(JSON.stringify(placed, null, 2));
+  process.exit(1);
+}
+console.log("execution_id:", executionId);
+console.log("UNCLE = the caller. CLINIC = what he heard Riya say.");
+
+const started = Date.now();
+let lastStatus = stringField(placedRecord, "status") ?? "queued";
+let seenTranscript = "";
+console.log(`${stamp()} ${lastStatus}`);
+let finalStatus = lastStatus;
+
+while (Date.now() - started < TIMEOUT_MS) {
+  await sleep(5000);
+  const execution = asRecord(await bolna("GET", `/executions/${executionId}`));
+  const status = stringField(execution, "status") ?? "unknown";
+  if (status !== lastStatus) {
+    console.log(`${stamp()} ${status}`);
+    lastStatus = status;
+  }
+  emitTranscript(stringField(execution, "transcript") ?? "");
+  if (TERMINAL.has(status)) {
+    finalStatus = status;
+    break;
+  }
+}
+
+if (!TERMINAL.has(finalStatus)) {
+  console.error(`Timed out after 8 minutes. Last status: ${lastStatus}`);
+  finalStatus = lastStatus;
+}
+
+const dir = join(repoRoot, "runs/phase0");
+await mkdir(dir, { recursive: true });
+const line = JSON.stringify({
+  ts: new Date().toISOString(),
+  label: args.label ?? "phase0",
+  to,
+  agent_id: agentId,
+  execution_id: executionId,
+  final_status: finalStatus,
+});
+await appendFile(join(dir, "calls.jsonl"), `${line}\n`);
+console.log(line);
+
+function parseArgs(argv: string[]): { to?: string; agent?: string; label?: string } {
+  const out: { to?: string; agent?: string; label?: string } = {};
+  for (let i = 0; i < argv.length; i += 1) {
+    const key = argv[i];
+    const value = argv[i + 1];
+    if (key === "--to") out.to = value;
+    if (key === "--agent") out.agent = value;
+    if (key === "--label") out.label = value;
+    if (key === "--to" || key === "--agent" || key === "--label") i += 1;
+  }
+  return out;
+}
+
+function stamp(): string {
+  return new Date().toISOString();
+}
+
+function emitTranscript(transcript: string): void {
+  if (!transcript || transcript === seenTranscript) return;
+  const fresh = transcript.startsWith(seenTranscript) ? transcript.slice(seenTranscript.length) : transcript;
+  seenTranscript = transcript;
+  const labeled = fresh
+    .replace(/(^|\n)assistant:\s?/g, "$1UNCLE: ")
+    .replace(/(^|\n)user:\s?/g, "$1CLINIC: ");
+  process.stdout.write(labeled.endsWith("\n") ? labeled : `${labeled}\n`);
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolveSleep) => setTimeout(resolveSleep, ms));
+}
+
+function asRecord(value: unknown): Record<string, unknown> {
+  return value && typeof value === "object" ? (value as Record<string, unknown>) : {};
+}
+
+function stringField(record: Record<string, unknown>, key: string): string | undefined {
+  const value = record[key];
+  return typeof value === "string" ? value : undefined;
+}

@@ -1,0 +1,5 @@
+node_modules/
+.env
+runs/
+.agent_id
+.ambient_id
