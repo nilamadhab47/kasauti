@@ -71,9 +71,9 @@ export function ReportSection({ report, origin }: { report: BotReport; origin: s
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <a href={`/score/${report.slug}`} className="rounded-full bg-[#0E0D0C] px-5 py-3 text-sm font-semibold text-white">
-            Open the sample report
+            Open the Sehat report
           </a>
-          <a href="#free-test" className="rounded-full border border-neutral-300 bg-white px-5 py-3 text-sm font-semibold text-neutral-900">
+          <a href="/workspace" className="rounded-full border border-neutral-300 bg-white px-5 py-3 text-sm font-semibold text-neutral-900">
             Stress-test my bot
           </a>
         </div>

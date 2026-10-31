@@ -116,8 +116,14 @@ The frontend is a Vercel project. The API, Postgres, and Redis are one Railway p
 - Connect this repo and set the root directory to `apps/web`.
 - Turn on including source files outside that directory. The UI imports caller profiles from `personas/` at the repo root.
 - Framework: Next.js. Install and build with pnpm.
-- Set `KASAUTI_API_URL` to the Railway API origin, with no trailing slash.
-- Set `NEXT_PUBLIC_SITE_URL` to the Vercel URL.
+- Set these two variables. Nothing else belongs on Vercel.
+
+```
+KASAUTI_API_URL=https://kasauti-api-production.up.railway.app
+NEXT_PUBLIC_SITE_URL=https://www.kasauti.space
+```
+
+Add both `www.kasauti.space` and `kasauti.space` as domains on the Vercel project, with `www` as the primary. On the Railway API, set `WEB_ORIGINS` to `https://www.kasauti.space,https://kasauti.space`.
 - Do not put Bolna, Anthropic, or database secrets on Vercel. The route handlers proxy to the API.
 
 ### Railway — API, Postgres, Redis

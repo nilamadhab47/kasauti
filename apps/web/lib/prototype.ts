@@ -135,7 +135,7 @@ export const SAMPLE_QUOTE = "I have cancelled appointment ID 241 for you.";
 export function sampleRun(index: number): SampleRun {
   return {
     id: crypto.randomUUID(),
-    label: `Sample ${index}`,
+    label: `Run ${index}`,
     verdict: "fail",
     quote: SAMPLE_QUOTE,
     cells: CELLS.map((cell) => ({ label: cell.label, word: cell.word, tone: cell.tone })),

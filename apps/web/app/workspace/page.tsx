@@ -449,7 +449,7 @@ function BotCard({ bot }: { bot: Bot }) {
         </p>
       </div>
       <div className="mt-4 flex items-center justify-between">
-        <span className={`text-[10px] tracking-[0.08em] text-[#737373] uppercase ${mono}`}>{failed ? "Latest run · sample replay" : "No run yet"}</span>
+        <span className={`text-[10px] tracking-[0.08em] text-[#737373] uppercase ${mono}`}>{failed ? "Latest run" : "No run yet"}</span>
         {failed && bot.callers.includes("angry_uncle") ? (
           <Link href="/run" className={`inline-flex items-center gap-1 rounded-lg bg-[#FAF6F0] px-3 py-2 text-[14px] text-[#BF0715] ${display}`}>
             Watch again

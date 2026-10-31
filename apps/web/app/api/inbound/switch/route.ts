@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   } catch {
     agent = "";
   }
-  if (!agent) return NextResponse.json({ ok: false, switched: false, error: "That agent is not one of the demo agents." }, { status: 400 });
+  if (!agent) return NextResponse.json({ ok: false, switched: false, error: "That agent is not ready for a run." }, { status: 400 });
 
   let response: Response;
   try {

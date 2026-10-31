@@ -42,7 +42,7 @@ export function SiteNav() {
             </a>
           ))}
           <a className="hover:text-black transition-colors" href="/score/sehat">
-            Sample report
+            Sehat report
           </a>
         </nav>
         <div className="flex items-center gap-2">
@@ -73,7 +73,7 @@ export function SiteNav() {
             </a>
           ))}
           <a className="py-3 text-sm font-medium" href="/score/sehat" onClick={() => setOpen(false)}>
-            Sample report
+            Sehat report
           </a>
         </nav>
       ) : null}

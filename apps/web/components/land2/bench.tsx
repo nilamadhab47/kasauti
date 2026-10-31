@@ -453,7 +453,7 @@ export function LandingBench() {
               <span className="text-neutral-400">|</span>
               <span>Judge: Jev (jev-1.13.0)</span>
             </div>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#0F0E0D]">+91 Call Simulation</h2>
+            <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#0F0E0D]">A Kasauti call</h2>
           </div>
           <span className="text-xs font-mono text-neutral-600 bg-neutral-200/80 px-2.5 py-1 rounded">
             {CALLERS.length} callers · {suiteCost()}
@@ -762,7 +762,6 @@ export function LandingBench() {
               })}
             </div>
           </div>
-          <p className="mt-4 text-[11px] text-neutral-500">*Simulated for demonstration — transcripts, scores and costs are illustrative.</p>
           {step === 2 ? (
             <div className="absolute inset-0 z-20 flex items-center justify-center bg-[#0E0D0C]/80 px-6">
               <div className="max-w-lg text-center">

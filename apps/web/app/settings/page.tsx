@@ -99,7 +99,7 @@ export default function SettingsPage() {
               />
             </label>
           </div>
-          <p className="mt-3 text-[13px] text-[#737373]">This sample stores the email. It does not send a link.</p>
+          <p className="mt-3 text-[13px] text-[#737373]">The email stays on this device. Kasauti does not send a link.</p>
         </section>
 
         <section className="mt-6 rounded-xl bg-white p-6 shadow-sm">

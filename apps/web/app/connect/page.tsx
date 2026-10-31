@@ -154,7 +154,7 @@ export default function Connect() {
                 </button>
               </div>
               <button type="button" onClick={skip} className={`mt-6 flex w-full items-center justify-center gap-2 rounded-lg bg-[#0E0D0C] py-3.5 text-[16px] font-medium text-white ${display}`}>
-                {next === "/run" ? "Play the sample" : fromBot ? "Back to the bot" : "Back to the workspace"}
+                {next === "/run" ? "Start the run" : fromBot ? "Back to the bot" : "Back to the workspace"}
                 <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
               </button>
               <button type="button" onClick={unlink} className="mt-3 w-full py-2 text-[15px] text-[#57534E] underline-offset-4 hover:text-[#0F0E0C] hover:underline">
@@ -197,7 +197,7 @@ export default function Connect() {
             Skip for now
           </button>
           <p className={`mt-2 text-center text-[10px] tracking-[0.06em] text-[#737373] uppercase ${mono}`}>
-            {next === "/run" ? "Next is the clinic sample, either way." : "Next is the workspace, either way."}
+            {next === "/run" ? "Next is the Sehat run, either way." : "Next is the workspace, either way."}
           </p>
             </>
           )}

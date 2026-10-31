@@ -25,6 +25,13 @@ export default function Home() {
         <ConversionDock />
       </main>
       <Footer />
+      <Link
+        href="/workspace"
+        className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full bg-[#0E0D0C] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(15,14,12,0.28)] hover:bg-neutral-800"
+      >
+        Test my bot
+        <span aria-hidden="true">→</span>
+      </Link>
     </div>
   );
 }
@@ -49,12 +56,12 @@ function Hero() {
               Synthetic Indian callers dial your agent on a real <strong>+91 line</strong>. Kasauti names the layer that broke — hearing, memory, facts, or privacy — and writes the fix. On Bolna that fix names the setting. A prompt block is included when the prompt is the layer that failed.
             </p>
             <div className="flex flex-wrap items-center gap-4 pt-2">
-              <a className="px-7 py-4 rounded-xl bg-[#0E0D0C] text-white font-medium text-sm flex items-center gap-3 shadow-xl hover:shadow-2xl hover:bg-neutral-900 transition-all" href="#test-bench">
-                <span>Inspect Active Test Simulation</span>
+              <Link className="px-7 py-4 rounded-xl bg-[#0E0D0C] text-white font-medium text-sm flex items-center gap-3 shadow-xl hover:shadow-2xl hover:bg-neutral-900 transition-all" href="/workspace">
+                <span>Stress-test my bot</span>
                 <svg className="w-4 h-4 text-[#FFB800]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path d="M14 5l7 7m0 0l-7 7m7-7H3" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
                 </svg>
-              </a>
+              </Link>
               <a className="px-6 py-4 rounded-xl border border-neutral-300 bg-white/70 hover:bg-white text-neutral-800 font-medium text-sm transition-all flex items-center gap-2 shadow-sm" href="#report">
                 <svg className="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
@@ -340,10 +347,10 @@ function Footer() {
             </a>
           ))}
           <Link className="hover:text-neutral-300 transition" href="/score/sehat">
-            Sample report
+            Sehat report
           </Link>
         </div>
-        <div className="text-neutral-500">Kasauti · कसौटी — a Bolna Symphony Buildathon project (2026)</div>
+        <div className="text-neutral-500">www.kasauti.space</div>
       </div>
     </footer>
   );

@@ -122,7 +122,7 @@ export default function OwnCategoryPage() {
             <p className={`text-[12px] tracking-[0.14em] text-[#B8860B] uppercase ${mono}`}>Your agent · The category</p>
             <h1 className={`mt-3 text-[40px] leading-tight font-semibold tracking-tight sm:text-[52px] ${display}`}>What does {name} do?</h1>
             <p className="mt-4 max-w-2xl text-lg leading-7 text-[#57534E]">
-              Select the agent on this key. Its prompt, model, transcriber, and voice are read from Bolna, the same brief as the demo agents. Then pick the category. The number we will use later is +91 {pretty(phone)}. Nothing is dialed on this page.
+              Select the agent on this key. Kasauti reads its prompt, model, transcriber, and voice from Bolna, then you pick the category. The number we will use later is +91 {pretty(phone)}. Nothing is dialed on this page.
             </p>
 
             {reading ? <p className="mt-6 text-[15px] text-[#57534E]">Reading the bot from Bolna…</p> : null}
@@ -189,11 +189,11 @@ export default function OwnCategoryPage() {
               <section className="mt-8 rounded-2xl border border-[#E7E5E4] bg-white p-6">
                 <h2 className={`text-[28px] font-semibold ${display}`}>We don&apos;t have callers for that job yet.</h2>
                 <p className="mt-3 max-w-2xl text-[15px] leading-6 text-[#57534E]">
-                  Tell us what the agent does and we&apos;ll add a category for it. Or test one of the demo agents, which already have callers.
+                  Tell us what the agent does and we&apos;ll add a category for it. Or open an agent that already has callers.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-3">
-                  <Link href="/#free-test" className={`inline-flex rounded-lg bg-[#0E0D0C] px-4 py-2.5 text-[15px] font-medium text-white ${display}`}>
-                    Write to us
+                  <Link href="/workspace" className={`inline-flex rounded-lg bg-[#0E0D0C] px-4 py-2.5 text-[15px] font-medium text-white ${display}`}>
+                    Open the workspace
                   </Link>
                 </div>
                 <div className="mt-6 grid gap-3 sm:grid-cols-2">

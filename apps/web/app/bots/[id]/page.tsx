@@ -273,7 +273,7 @@ export default function BotWorkbench() {
             {failed ? <span className={`text-right text-[12px] text-[#57534E] ${mono}`}>Last call $0.18</span> : null}
             {bot.shop === "clinic" && bot.callers.includes("angry_uncle") ? (
               <Link href="/run" className={`inline-flex items-center rounded-lg bg-[#0E0D0C] px-6 py-3 text-[18px] font-semibold text-white shadow-md ${display}`}>
-                {failed ? "Run again →" : "Play the sample →"}
+                {failed ? "Run again →" : "Run the crash test →"}
               </Link>
             ) : null}
           </div>
@@ -318,7 +318,7 @@ export default function BotWorkbench() {
             <article className="flex flex-col justify-between gap-4 rounded-xl bg-white p-5 shadow-sm md:flex-row md:items-center">
               <div>
                 <p className="flex flex-wrap items-center gap-2 text-[15px]">
-                  <span className={`font-medium ${mono}`}>Sample replay</span>
+                  <span className={`font-medium ${mono}`}>Sharma ji</span>
                   <span className="text-[#E7E5E4]">·</span>
                   <span className="font-medium">Sharma ji, Delhi, wants ₹500 back</span>
                   <span className="text-[#E7E5E4]">·</span>
