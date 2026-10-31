@@ -167,7 +167,7 @@ export default function CallersPage() {
     const current = openSession();
     if (ownName) {
       saveSession({ ...current, ownCallerPicks: selected });
-    } else {
+    } else if (agent) {
       saveSession({
         ...current,
         callerPicks: { ...current.callerPicks, [agent]: selected },

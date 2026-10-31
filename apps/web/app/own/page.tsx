@@ -79,7 +79,7 @@ export default function OwnCategoryPage() {
     }
     setFound(detail.agent);
     setSuggested(detail.category ?? null);
-    if (fromClick || !userPicked.current) setPicked(detail.category);
+    if (fromClick || !userPicked.current) setPicked(detail.category ?? null);
   }
 
   function choose(id: CategoryId | "other") {

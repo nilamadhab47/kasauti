@@ -13,8 +13,25 @@ const body = "[font-family:var(--font-hanken)]";
 const mono = "[font-family:var(--font-mono)]";
 
 type Row = (typeof LEVEL1_COMPARE.rows)[number];
-type Side = Row["before"];
-type CellOut = Side["cells"][number];
+type CellOut = {
+  label: string;
+  word: string;
+  rounded: number;
+  critical: boolean;
+  heldByFloor: boolean;
+};
+type Turn = { speaker: string; text: string };
+type Side = {
+  verdict: string;
+  quote: string;
+  sentence: string;
+  recording?: string | null;
+  turns: readonly Turn[];
+  cells: readonly CellOut[];
+  heldByFloor: boolean;
+  costUsd?: number | null;
+  model?: string;
+};
 
 export default function ComparePage() {
   const router = useRouter();

@@ -166,18 +166,19 @@ export function Layers() {
       const jump = !dot.dataset.placed || active === "settings" || dot.dataset.part === "settings";
       dot.dataset.part = active;
       dot.classList.remove("is-red");
-      timeline = gsap.timeline();
+      const motion = gsap.timeline();
+      timeline = motion;
       if (jump) {
-        timeline.set(dot, { ...point, opacity: 1 });
+        motion.set(dot, { ...point, opacity: 1 });
         dot.dataset.placed = "1";
       } else {
-        timeline.set(dot, { opacity: 1 });
-        timeline.to(dot, { ...point, duration: 0.7, ease: "power2.inOut" });
+        motion.set(dot, { opacity: 1 });
+        motion.to(dot, { ...point, duration: 0.7, ease: "power2.inOut" });
       }
-      timeline.call(() => {
+      motion.call(() => {
         if (!dead) dot.classList.add("is-red");
       });
-      timeline.call(
+      motion.call(
         () => {
           if (!dead) dot.classList.remove("is-red");
         },
