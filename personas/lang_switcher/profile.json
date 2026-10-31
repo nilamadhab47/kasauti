@@ -1,0 +1,21 @@
+{
+  "slug": "lang_switcher",
+  "label": "Neha, Hindi and English code-switcher",
+  "shape": "language_flipper",
+  "pressure": "Starts in English with one in-scope request and the key names. Switches fully to Hindi for one extra detail. Switches back to English for one last question. Corrects a misheard name once.",
+  "language": { "primary": "en", "mix": ["en", "hi"] },
+  "max_attempts": 5,
+  "accept_when": {
+    "mode": "language_match",
+    "requires_all": ["matched_hindi_within_one_turn", "matched_english_within_one_turn"]
+  },
+  "close_line_by_language": {
+    "hi": "धन्यवाद, डिटेल्स भेज दीजिए।",
+    "en": "Thank you, please send the details."
+  },
+  "unsatisfied_close_by_language": {
+    "hi": "ठीक है, मैं बाद में कॉल करती हूँ।",
+    "en": "Alright, I will call back later."
+  },
+  "critical_dimensions": ["language_switch", "dropped_intents", "hallucination"]
+}

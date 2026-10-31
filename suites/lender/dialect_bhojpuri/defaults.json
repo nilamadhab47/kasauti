@@ -1,0 +1,22 @@
+{
+  "id": "dialect_bhojpuri",
+  "name": "Ramesh, Bhojpuri dialect caller",
+  "domain": "lender",
+  "target_name": "RupeeSetu Finance",
+  "user_data": {
+    "target_name": "RupeeSetu Finance",
+    "goal": "Complete the refund request for Shivnath Yadav's double EMI debit on loan account LN-883201, and hear how many days the refund will take or the amount to be refunded from real facts (or 'will check') before confirming.",
+    "seed_script": "1. State that you are calling to ask for a refund because two EMI debits happened in the same month for your elder brother's loan.\n2. Explain that one debit happened in the first week and the second one happened last Monday, both from the same account this month.\n3. Give your brother's name as Shivnath Yadav and the loan account number as LN-883201.\n4. Ask how many days the refund will take and how much money will be returned.\n5. Confirm that one of the two debits will be reversed, the loan account number LN-883201, the name Shivnath Yadav, and the refund timeline or amount the agent told you."
+  },
+  "success_criteria": [
+    "Accepts the refund request for the double EMI debit that happened this month (not a different month or issue)",
+    "Records the borrower's name as Shivnath Yadav and loan account LN-883201 correctly",
+    "Answers the refund timeline or refund amount from real facts, or clearly says it will check and get back",
+    "Asks the caller to repeat or clarify when Bhojpuri words or village-style time references are unclear, instead of guessing or assuming"
+  ],
+  "critical_dimensions": [
+    "task_completion",
+    "dropped_intents",
+    "repair"
+  ]
+}

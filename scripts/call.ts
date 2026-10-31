@@ -1,5 +1,7 @@
 import { appendFile, mkdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { callerBrief, loadPersonaProfile, loadTargetManifest } from "../packages/core/src/index.ts";
+import { CATEGORY_IDS, CATEGORY_AGENT, type CategoryId } from "../apps/web/lib/caller-packs.ts";
 import { bolna } from "./lib/bolna.js";
 import { env, repoRoot } from "./lib/env.js";
 
@@ -9,7 +11,7 @@ const TIMEOUT_MS = 8 * 60 * 1000;
 const args = parseArgs(process.argv.slice(2));
 const to = args.to;
 if (!to) {
-  console.error("usage: pnpm call -- --to +91XXXXXXXXXX [--agent <id>] [--label <text>]");
+  console.error("usage: pnpm call -- --to +91XXXXXXXXXX [--persona <folder>] [--category clinic|lender|restaurant|clothing|property] [--agent <id>] [--label <text>]");
   process.exit(1);
 }
 if (!env.ALLOWED_NUMBERS.includes(to)) {
@@ -17,20 +19,28 @@ if (!env.ALLOWED_NUMBERS.includes(to)) {
   process.exit(1);
 }
 
-const agentId = args.agent ?? env.PERSONA_AGENT_ID;
-if (!agentId) {
-  console.error("No agent id. Pass --agent or set PERSONA_AGENT_ID.");
+const persona = args.persona ?? "personas/angry_uncle";
+const personaId = persona.split("/").filter(Boolean).pop() ?? "";
+const category = args.category ?? "clinic";
+if (!(CATEGORY_IDS as readonly string[]).includes(category)) {
+  console.error(`Unknown category "${category}". Known: ${CATEGORY_IDS.join(", ")}`);
   process.exit(1);
 }
-
-const defaults = JSON.parse(await readFile(join(repoRoot, "personas/angry_uncle/defaults.json"), "utf8")) as {
-  user_data: Record<string, string>;
-};
+const slug = CATEGORY_AGENT[category as CategoryId];
+const profile = await loadPersonaProfile(repoRoot, personaId);
+const manifest = await loadTargetManifest(repoRoot, slug);
+const brief = callerBrief(profile, manifest);
+const agentFile = await readFile(join(repoRoot, persona, ".agent_id"), "utf8").catch(() => "");
+const agentId = args.agent ?? (agentFile.trim() || env.PERSONA_AGENT_ID);
+if (!agentId) {
+  console.error("No agent id. Pass --agent, add .agent_id, or set PERSONA_AGENT_ID.");
+  process.exit(1);
+}
 
 const placed = await bolna("POST", "/call", {
   agent_id: agentId,
   recipient_phone_number: to,
-  user_data: defaults.user_data,
+  user_data: brief.user_data,
   bypass_call_guardrails: true,
 });
 const placedRecord = asRecord(placed);
@@ -40,7 +50,8 @@ if (!executionId) {
   process.exit(1);
 }
 console.log("execution_id:", executionId);
-console.log("UNCLE = the caller. CLINIC = what he heard Riya say.");
+console.log(`category: ${category} · ${manifest.display_name}`);
+console.log("CALLER = the persona. The other side is the agent under test.");
 
 const started = Date.now();
 let lastStatus = stringField(placedRecord, "status") ?? "queued";
@@ -73,6 +84,7 @@ await mkdir(dir, { recursive: true });
 const line = JSON.stringify({
   ts: new Date().toISOString(),
   label: args.label ?? "phase0",
+  persona: defaults.id ?? persona,
   to,
   agent_id: agentId,
   execution_id: executionId,
@@ -81,15 +93,17 @@ const line = JSON.stringify({
 await appendFile(join(dir, "calls.jsonl"), `${line}\n`);
 console.log(line);
 
-function parseArgs(argv: string[]): { to?: string; agent?: string; label?: string } {
-  const out: { to?: string; agent?: string; label?: string } = {};
+function parseArgs(argv: string[]): { to?: string; agent?: string; label?: string; persona?: string; category?: string } {
+  const out: { to?: string; agent?: string; label?: string; persona?: string; category?: string } = {};
   for (let i = 0; i < argv.length; i += 1) {
     const key = argv[i];
     const value = argv[i + 1];
     if (key === "--to") out.to = value;
     if (key === "--agent") out.agent = value;
     if (key === "--label") out.label = value;
-    if (key === "--to" || key === "--agent" || key === "--label") i += 1;
+    if (key === "--persona") out.persona = value;
+    if (key === "--category") out.category = value;
+    if (key === "--to" || key === "--agent" || key === "--label" || key === "--persona" || key === "--category") i += 1;
   }
   return out;
 }
@@ -103,7 +117,7 @@ function emitTranscript(transcript: string): void {
   const fresh = transcript.startsWith(seenTranscript) ? transcript.slice(seenTranscript.length) : transcript;
   seenTranscript = transcript;
   const labeled = fresh
-    .replace(/(^|\n)assistant:\s?/g, "$1UNCLE: ")
+    .replace(/(^|\n)assistant:\s?/g, "$1CALLER: ")
     .replace(/(^|\n)user:\s?/g, "$1CLINIC: ");
   process.stdout.write(labeled.endsWith("\n") ? labeled : `${labeled}\n`);
 }

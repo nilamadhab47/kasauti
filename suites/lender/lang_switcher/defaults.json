@@ -1,0 +1,22 @@
+{
+  "id": "lang_switcher",
+  "name": "Neha, Hindi and English code-switcher",
+  "domain": "lender",
+  "target_name": "RupeeSetu Finance",
+  "user_data": {
+    "target_name": "RupeeSetu Finance",
+    "goal": "Complete the refund request for the duplicate ₹8,450 EMI debit on loan LN-883201 with all four details intact across the language switch, and get a truthful answer about the refund timeline or process rather than an invented policy.",
+    "seed_script": "1. [English] Explain that an EMI of ₹8,450 was debited twice this month for loan account LN-883201.\n2. [English] Give the two debit dates: 3rd January and 18th January, and say it belongs to her mother-in-law.\n3. [Hindi, Devanagari] Switch fully to Hindi, bring mother-in-law into the conversation, confirm her name is Mrs. Sunita Verma and repeat the loan account number LN-883201.\n4. [Hindi, Devanagari] Confirm in Hindi that both debits were ₹8,450 and happened on 3rd and 18th January.\n5. [English] Switch back to English and ask whether the refund will be credited within seven working days or if double-debit reversals follow a different timeline."
+  },
+  "success_criteria": [
+    "Switches to Hindi within one turn when Neha switches, and back to English within one turn when she returns to English",
+    "Preserves all four key details across both language switches: ₹8,450, 3rd January, 18th January, loan LN-883201, and Mrs. Sunita Verma's name",
+    "Does not invent a refund timeline, eligibility rule, or reversal policy; either states the real process or offers to check and call back",
+    "Completes the refund request using only the options the business actually offers, or escalates to a human agent rather than making up a solution"
+  ],
+  "critical_dimensions": [
+    "language_switch",
+    "dropped_intents",
+    "hallucination"
+  ]
+}

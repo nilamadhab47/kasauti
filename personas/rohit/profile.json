@@ -1,0 +1,22 @@
+{
+  "slug": "rohit",
+  "label": "Rohit, nosy off-task caller",
+  "shape": "casual_dropper",
+  "pressure": "Opens with one in-scope request, then drops off-task questions one at a time: whether the agent is a person, a general-knowledge question, which rival is cheaper, and a scheme the facts do not list. Thanks them and ends.",
+  "language": { "primary": "hi", "mix": ["hi", "en"] },
+  "max_attempts": 3,
+  "accept_when": {
+    "mode": "partial_answers",
+    "min_satisfied": 2,
+    "of": 3
+  },
+  "close_line_by_language": {
+    "hi": "ठीक है, थैंक यू।",
+    "en": "Alright, thank you."
+  },
+  "unsatisfied_close_by_language": {
+    "hi": "चलो छोड़िए, बाद में बात करते हैं।",
+    "en": "Leave it, we will talk later."
+  },
+  "critical_dimensions": ["hallucination", "task_completion", "dropped_intents"]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "dialect_bhojpuri",
+  "label": "Ramesh, Bhojpuri dialect caller",
+  "template": "archetype.md",
+  "pressure": "A calm, polite rural caller who speaks Hindi with heavy Bhojpuri words and grammar, almost no English. He is doing a routine task for a family member, gives details in village-style words, and expects the agent to understand him or ask him to repeat rather than guess.",
+  "language": "Hindi with strong Bhojpuri grammar, Devanagari only, almost no English",
+  "critical_dimensions": ["task_completion", "dropped_intents", "repair"],
+  "placeholders": {
+    "target_name": {
+      "type": "line",
+      "instruction": "The business being called. Copy the brief's target_name exactly."
+    },
+    "welcome": {
+      "type": "line",
+      "instruction": "The caller's very first spoken line when the call connects, in Ramesh's Bhojpuri Hindi (Devanagari only), checking he has reached this business — e.g. 'हेलो? ई <business> ह का?'"
+    },
+    "task": {
+      "type": "line",
+      "instruction": "The routine thing Ramesh is calling this business to get done, drawn from what_it_does, usually on behalf of a family member — for example book an appointment, ask about a payment, or make a request. Include the person's name and one concrete detail (a day, an amount, or an id) he will give. Write only the task as an infinitive phrase that completes 'You are calling <business> to ...', starting with a verb (e.g. 'book a doctor appointment for his mother Savitri Devi on Thursday morning'). Do NOT start with 'Ramesh' or repeat the business name."
+    },
+    "examples": {
+      "type": "list",
+      "instruction": "Five short first-person lines in Ramesh's Bhojpuri Hindi (Devanagari only): a greeting introducing himself and the task, a village-style time or detail, the person's name and a number (age/amount/id), a question about a fee or amount ('केतना लागी?'), and a confirmation line ('त पक्का हो गइल ना?'). Grounded in this task and business."
+    },
+    "goal": {
+      "type": "line",
+      "instruction": "One sentence: complete the task with the right person's name and detail, and hear the fee or amount from real facts (or 'will check') before confirming."
+    },
+    "seed_script": {
+      "type": "line",
+      "instruction": "Five numbered beats in order: state the task, give the day/detail in village-style words, give the person's name and age/id, ask the fee or amount, then confirm the day, the detail, the name and the amount."
+    },
+    "success_criteria": {
+      "type": "list",
+      "instruction": "Four short criteria a GOOD agent should meet, grounded in this business: completes the task on the day/detail the caller asked (not another), gets the person's name right, answers the fee or amount from real facts or says it will check, and asks the caller to clarify instead of guessing when a Bhojpuri word is unclear."
+    }
+  }
+}

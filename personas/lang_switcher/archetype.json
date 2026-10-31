@@ -1,0 +1,42 @@
+{
+  "id": "lang_switcher",
+  "label": "Neha, Hindi and English code-switcher",
+  "template": "archetype.md",
+  "pressure": "A polite bilingual professional doing a routine task over the phone, with a Hindi-only elder beside her. She code-switches English to Hindi and back mid-call, carries a few specific details that must survive the switch, and asks one eligibility or policy question the agent might be tempted to fake.",
+  "language": "polished Indian English in Latin, then Hindi in Devanagari; never spell English words in Devanagari",
+  "critical_dimensions": ["language_switch", "dropped_intents", "hallucination"],
+  "placeholders": {
+    "target_name": {
+      "type": "line",
+      "instruction": "The business being called. Copy the brief's target_name exactly."
+    },
+    "welcome": {
+      "type": "line",
+      "instruction": "The caller's very first spoken line when the call connects, in Neha's polished Indian English, checking she has reached this business — e.g. 'Hi, hello, is this <business>?'"
+    },
+    "task": {
+      "type": "line",
+      "instruction": "The routine thing Neha is calling this business to get done, drawn from what_it_does — for example book an appointment, change a payment date, or raise a request. Include two or three concrete details she gives (a name, a date/time, an amount) that the agent must keep across the language switch. Write only the task as an infinitive phrase that completes 'You are calling <business> to ...', starting with a verb (e.g. 'book an appointment for her mother-in-law Mrs. Kamla Sharma for Tuesday evening'). Do NOT start with 'Neha' or repeat the business name."
+    },
+    "key_details": {
+      "type": "line",
+      "instruction": "A short comma-separated list of the exact details from the task that must survive the switch (e.g. 'Aarav's name, his age, and Tuesday evening')."
+    },
+    "examples": {
+      "type": "list",
+      "instruction": "Five short first-person lines showing her switch: start in English (Latin), move fully to Hindi (Devanagari) bringing her mother-in-law in, confirm a detail in Hindi, then one closing question back in English. Grounded in this task and business."
+    },
+    "goal": {
+      "type": "line",
+      "instruction": "One sentence: complete the task with the details intact, and get a truthful answer to one eligibility or policy question (something the agent could wrongly invent) rather than a made-up one."
+    },
+    "seed_script": {
+      "type": "line",
+      "instruction": "Five numbered beats matching the language plan: beats 1-2 English stating the task and a detail, beat 3 switch fully to Hindi adding one more detail, beat 4 Hindi confirm the day/detail, beat 5 switch back to English and ask the eligibility/policy question."
+    },
+    "success_criteria": {
+      "type": "list",
+      "instruction": "Four short criteria a GOOD agent should meet, grounded in this business: follows the caller's language within one turn both into Hindi and back to English, keeps every key detail across the switch, does not invent a fact, price, or eligibility/policy answer, and completes the task only with real options or says it will check."
+    }
+  }
+}

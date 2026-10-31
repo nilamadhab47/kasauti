@@ -1,0 +1,21 @@
+{
+  "slug": "dialect_bhojpuri",
+  "label": "Ramesh, Bhojpuri dialect caller",
+  "shape": "regional_dialect",
+  "pressure": "Speaks Bhojpuri in Devanagari. If a word is not understood, asks for plain Hindi. Corrects the name once. The request itself follows the desk: a morning visit, a table, a site visit, an order, or the EMI.",
+  "language": { "primary": "hi", "mix": ["hi"] },
+  "max_attempts": 5,
+  "accept_when": {
+    "mode": "dialect_repair",
+    "requires_all": ["first_regional_phrase_handled", "second_regional_phrase_handled"]
+  },
+  "close_line_by_language": {
+    "hi": "ठीक बा, फीस सुन लीं। बुकिंग पक्का कर दीं।",
+    "en": "Alright, I heard the fee. Confirm the booking."
+  },
+  "unsatisfied_close_by_language": {
+    "hi": "ना समझाइल। हम बाद में कॉल करब।",
+    "en": "That was not clear. I will call again later."
+  },
+  "critical_dimensions": ["task_completion", "dropped_intents", "repair"]
+}

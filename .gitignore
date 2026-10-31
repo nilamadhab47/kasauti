@@ -1,5 +1,13 @@
 node_modules/
+dist/
+.next/
 .env
+.env.local
 runs/
 .agent_id
 .ambient_id
+.DS_Store
+.cursor/
+.taste-skill/
+stitch_kasauti_voice_bot_crash_tests/
+*.tsbuildinfo

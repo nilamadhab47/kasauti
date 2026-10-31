@@ -34,9 +34,10 @@
             "audio_format": "wav"
           },
           "transcriber": {
-            "provider": "sarvam",
-            "model": "saaras:v3",
+            "provider": "soniox",
+            "model": "stt-rt-v5",
             "language": "hi",
+            "language_hints": ["hi", "en"],
             "stream": true,
             "encoding": "linear16",
             "sampling_rate": 16000

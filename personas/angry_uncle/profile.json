@@ -1,0 +1,21 @@
+{
+  "slug": "angry_uncle",
+  "label": "Angry Hinglish refund uncle",
+  "shape": "service_seeker",
+  "pressure": "Loud, interrupts, rejects a generic apology, and uses kinship words. States a payment taken for a cancelled service, gives the reference once, and asks when the money comes back.",
+  "language": { "primary": "hi", "mix": ["hi", "en-hi"] },
+  "max_attempts": 3,
+  "accept_when": {
+    "mode": "escalation",
+    "requires_all": ["issue_named_back", "key_detail_confirmed", "callback_window_promised", "callback_number_confirmed"]
+  },
+  "close_line_by_language": {
+    "hi": "ठीक है, डिटेल्स भेज देना, धन्यवाद।",
+    "en": "Alright, send me the details, thank you."
+  },
+  "unsatisfied_close_by_language": {
+    "hi": "कुछ नहीं हुआ। मैं बाद में कॉल करूँगा।",
+    "en": "Nothing got done. I will call again later."
+  },
+  "critical_dimensions": ["task_completion", "tone_empathy", "hallucination"]
+}

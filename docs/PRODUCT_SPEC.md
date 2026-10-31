@@ -17,38 +17,41 @@ Indian businesses are putting voice agents on clinic, delivery, lending and supp
 The bot mishears, invents a doctor's timing, hangs up on a grandmother, or loops "Sorry, I didn't get that." Builders find out from angry customers. Manual testing doesn't scale: one builder, one phone, one accent, and every prompt change can break something that used to work.
 
 ## 3. Users
-- **Primary:** builders and small agencies shipping voice agents for Indian customers on Bolna (beachhead: the Bolna Slack community), and later Vapi, Retell and ElevenLabs.
-- **Secondary:** Indian SMBs and ops teams that bought a voice agent and want a check after every change.
+- **Primary:** a small B2B team that ships voice agents for Indian customers. An agency, or an in-house team. They usually build on Bolna. Bolna Slack is where we meet them. Bolna the company is not the first buyer.
+- **Secondary:** the same team’s client, who receives a read-only report and never logs in.
 
-**Job to be done:** "Before I ship this prompt change, tell me in 5 minutes whether my bot still handles real Indian callers."
+**Job to be done:** "Before I ship this prompt change, tell me whether my bot still handles real Indian callers, in a report I can send to my client."
 
-**Framing:** a **regression test for voice agents**. The first report card is the hook; rerunning after every change is the habit.
+**Framing:** a regression suite. The first brief is the hook. Rerunning after every change is what they pay for.
+
+The build plan is `docs/PLAN.md`. This file keeps the product rules. If they disagree, `docs/PLAN.md` wins on scope and order.
 
 ## 4. Positioning (honest)
 Cekura, Coval and Hamming already offer simulated callers, accents, noise and some Hindi. Never say "nobody tests Hinglish." Kasauti's angle:
 1. **India-first persona library**, not a language toggle: real Indian call situations written natively in Devanagari and Hinglish, played with Sarvam code-mixed voices.
 2. **Bolna-native and +91-native:** real calls from Indian numbers over Indian carriers.
-3. **Self-serve for indie builders:** one form, one click, a shareable report. No sales call.
-4. **Evidence-backed judging (Jev):** every score below 5 quotes the exact line that failed.
+3. **A dashboard a B2B team can use the same day:** add a bot, pick a pack, read a brief, rerun, share the link. An API starts that same run. No SDK and no button inside Bolna.
+4. **Evidence-backed judging:** [Jev](https://docs.typesafe.ai/introduction) sets the score. Claude writes the brief. Every quote has to be a line from the call.
 
-## 5. MVP scope (buildathon)
+## 5. What we ship so one company can onboard
 
-### In
-- Register a target: name, phone number, platform, task goal, facts sheet, consent tick.
-- Built-in personas (4 core, 2 stretch). No custom personas.
-- Run: places one call per selected persona, at most 3 at a time.
-- Report card: personas × dimensions grid, red/amber/green, pass rate.
-- Call detail: audio player, transcript as turns, evidence for each failing score.
-- Fix suggestions: 3–6 prompt lines rolled up from the judge's hints.
-- Rerun with the same personas and beats, plus a v1-vs-v2 compare view.
-- Public read-only share link.
+Full sequence, pages, API, and the later list: `docs/PLAN.md`.
 
-### Out (for now)
-- Real auth (use one API key per invited builder, or none).
-- Custom persona editor.
-- Precise audio-level latency analysis (MVP shows latency as "n/a" unless the audio service gets built).
-- Precise mid-sentence barge-in (needs our own media-stream caller).
-- CI integration, billing, teams.
+### In that product
+- Workspace with a magic-link invite.
+- A bot: name, phone number, platform, task, facts sheet, consent tick.
+- Six caller templates, a clinic pack, a delivery pack, and a form to add a caller.
+- A queue, at most 3 calls at once.
+- A brief on top of the grid: pass or fail, worst quote, one prompt change. Audio and transcript underneath. Cost of the run on the page.
+- Rerun, compare, and a public read-only link.
+- An API key. `POST /v1/runs` and `GET /v1/runs/:id` create and read the same run as the button.
+
+### Later
+- The bot’s own transcript beside the caller’s. Latency from the recording. Run history.
+- An outbound webhook and a sample GitHub Action.
+- The customer’s own Bolna key.
+- Training mode, where the caller phones a person and the brief scores the person.
+- An embeddable test button. A price page. Nightly runs. Slack. Teams and SSO.
 
 ## 6. Personas
 
@@ -86,41 +89,23 @@ Eight dimensions, 0–5 each:
 - Every score below 5 must quote the target's exact words. No evidence, no score.
 
 ## 8. User flow
-1. **New target** → form → saved.
-2. **Run** → tick personas, give a label (`v1-baseline`) → start.
-3. **Live run** page: each persona card moves queued → ringing → talking → scoring → done.
-4. **Report card** fills in. Header: "2/4 personas passed".
-5. Click a cell → **call detail**: audio, transcript, evidence ("Turn 7: bot said Dr. Mehta is available Sunday. Facts: clinic closed Sunday.").
-6. **Fix suggestions** panel → copy into the bot's prompt.
-7. **Rerun** (label `v2-fix`) → **compare** view with flipped cells highlighted and "Δ pass rate".
-8. **Share** → public link.
+The customer flow, the pages, and the API are in `docs/PLAN.md` §1, §2 and §7.
 
 ## 9. Demo target
 "Sehat Clinic" on Bolna. v1 is a realistic but fragile first draft (`demo-target/sehat_v1.md`); v2 applies the fixes (`demo-target/sehat_v2.md`). Facts sheet: `demo-target/facts.json`.
 
 The demo uses only real numbers from real runs. If v2 still fails a persona, that red stays on screen.
 
-## 10. Success metrics for the buildathon
-Fill in real numbers only; never round up.
-- Outside builders whose bots were tested: target **5+**
-- Calls run: target **50+**
-- Distinct bugs found in outside bots, and how many were fixed and confirmed by a rerun
-- At least **one builder who reran** after changing their prompt (the repeat-use signal)
-- Sehat v1 → v2 pass rate
-- 1–3 real quotes from builders (with permission)
+## 10. Success
+Fill in real numbers only.
+- One company added their own bot, ran a pack, and either reran after a prompt change or sent the report link to a teammate.
+- Sehat v1 → v2 pass rate, from real runs.
+- A script started a run through the API and got the same brief as the dashboard.
 
 ## 11. Rules for calling
 - A target can only be added with the consent tick: "I own this agent or have permission to call it."
 - Only owner-submitted numbers are dialled. Rate limit: 3 runs per target per day.
 - Calls at reasonable hours.
 
-## 12. Key dates
-| Date | Milestone |
-|---|---|
-| Sat Oct 17 | Phase 0: one real bot-to-bot call (go/no-go) |
-| Sun Oct 18 | First scored call; 60-second clip |
-| Tue Oct 20 | 3 builders said "test my bot" (go/no-go) |
-| Sun Oct 25 | Full pipeline, report card, outside bots tested |
-| Thu Oct 29 | 3-minute demo video |
-| **Sat Oct 31, before noon IST** | **Submit** |
-| Nov 3 / Nov 5–7 / Nov 8 / Nov 20 | Shortlist / interviews / results / finale in Bengaluru |
+## 12. Dates
+The build order is `docs/PLAN.md` §8. Submit the hackathon before noon IST on Sat 31 Oct 2026 with whatever of steps 1–7 is real. Interviews 5–7 Nov. Finale 20 Nov, Bengaluru.

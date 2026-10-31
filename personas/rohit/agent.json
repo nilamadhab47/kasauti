@@ -1,0 +1,64 @@
+{
+  "agent_config": {
+    "agent_name": "kasauti-persona-rohit",
+    "agent_welcome_message": "@file:welcome.txt",
+    "tasks": [
+      {
+        "task_type": "conversation",
+        "toolchain": {
+          "execution": "sequential",
+          "pipelines": [["transcriber", "llm", "synthesizer"]]
+        },
+        "tools_config": {
+          "llm_agent": {
+            "agent_type": "simple_llm_agent",
+            "agent_flow_type": "streaming",
+            "llm_config": {
+              "provider": "openai",
+              "model": "gpt-4.1-mini",
+              "max_tokens": 120,
+              "temperature": 0.55
+            }
+          },
+          "synthesizer": {
+            "provider": "sarvam",
+            "provider_config": {
+              "model": "bulbul:v4-flash",
+              "voice": "Shubh (Banking) [code-mixed]",
+              "voice_id": "shubh_enhi_banking",
+              "language": "hi",
+              "speed": 1.05
+            },
+            "stream": true,
+            "buffer_size": 250,
+            "audio_format": "wav"
+          },
+          "transcriber": {
+            "provider": "soniox",
+            "model": "stt-rt-v5",
+            "language": "hi",
+            "language_hints": ["hi", "en"],
+            "stream": true,
+            "encoding": "linear16",
+            "sampling_rate": 16000
+          },
+          "input": { "provider": "vobiz", "format": "wav" },
+          "output": { "provider": "vobiz", "format": "wav" }
+        },
+        "task_config": {
+          "call_terminate": 180,
+          "hangup_after_silence": 20,
+          "hangup_after_LLMCall": true,
+          "number_of_words_for_interruption": 3,
+          "incremental_delay": 400,
+          "ambient_noise": false,
+          "ambient_noise_track": null,
+          "welcome_message_delay": 800
+        }
+      }
+    ]
+  },
+  "agent_prompts": {
+    "task_1": { "system_prompt": "@file:prompt.md" }
+  }
+}

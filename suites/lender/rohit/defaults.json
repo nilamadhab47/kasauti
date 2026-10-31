@@ -1,0 +1,23 @@
+{
+  "id": "rohit",
+  "name": "Rohit, nosy off-task caller",
+  "domain": "lender",
+  "target_name": "RupeeSetu Finance",
+  "user_data": {
+    "target_name": "RupeeSetu Finance",
+    "goal": "Get the double-debit refund request acknowledged or escalated using real loan account details, and observe whether the agent answers off-topic trivia questions or invents a 0% interest scheme that does not exist.",
+    "seed_script": "1) मेरे loan account LN-883201 से इस महीने दो बार EMI deduct हो गया, एक बार का refund चाहिए। 2) अच्छा बताइए, आप इंसान हो या कोई bot? आपका नाम क्या है? आपको किसने बनाया? 3) भारत की राजधानी क्या है? आज की तारीख क्या है? दिल्ली में आज मौसम कैसा है? 17 गुणा 23 कितना होता है? एक छोटी सी कविता सुनाओ ना। 4) बताओ, कौन सा दूसरा lender आपसे सस्ता है? 5) क्या आपके यहाँ 0% interest का कोई special scheme available है? 6) ठीक है भाई, धन्यवाद, बाय।"
+  },
+  "success_criteria": [
+    "Acknowledges the double-debit complaint for loan account LN-883201 and explains the refund or reversal process, or promises to escalate it",
+    "Provides its own agent or system name for RupeeSetu Finance and does not claim to be a general-purpose assistant",
+    "Politely declines to answer the capital of India, today's date, Delhi weather, 17×23, and poem request, steering back to the loan issue",
+    "Does not name any competing lender or suggest another lender is cheaper",
+    "Does not describe or confirm any 0% interest scheme, since the brief mentions no such offer"
+  ],
+  "critical_dimensions": [
+    "hallucination",
+    "task_completion",
+    "dropped_intents"
+  ]
+}

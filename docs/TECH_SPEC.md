@@ -4,26 +4,30 @@
 
 ## 1. Architecture (lean on purpose)
 
-About 50 hours of evening and weekend time is available. The judges care about a real call, a believable report card and real users, not infrastructure. So:
+The product we are building is `docs/PLAN.md`: a dashboard and an HTTP API so one B2B team can run a caller pack against their own bot. The judges still need a real call, a brief with quotes, and a company that is not us. So:
 
-- **One TypeScript repo**, pnpm workspace.
-- **One NestJS server** does everything: REST API, Bolna webhook, background jobs (pg-boss), and **server-rendered HTML pages** (Handlebars + Tailwind via CDN). No separate frontend app.
-- **Postgres** (Railway plugin) for data *and* the job queue (pg-boss). No Redis.
-- **Cloudflare R2** (S3 API) for recordings.
-- **No Python audio service in the MVP.** Latency shows as "n/a". Add it only if you're ahead of schedule (§11).
-- **No Next.js in the MVP.** Server-rendered pages are enough for the demo.
+TypeScript everywhere. pnpm workspace.
+
+- **Dashboard:** Next.js on Vercel, shadcn/ui, Tailwind. This is the product a company logs into.
+- **API:** NestJS on Railway. REST, the Bolna webhook, and the BullMQ worker. Bolna calls this host, not the Vercel app.
+- **Postgres** on Railway. Drizzle is the schema layer.
+- **Redis** on Railway. Cache for run status and the voice list. BullMQ uses the same Redis as the broker for the call queue.
+- **Cloudflare R2** for recordings. Vercel and Railway disks are the wrong place for audio.
+- **Judge:** Jev (`jev-latest`) on TypeSafe. One Score question per dimension, in a single request. Claude only writes the brief.
+- **No Python audio service until later.** Latency shows as "n/a" until then.
 
 ```
-Browser ──HTML/forms──▶ NestJS server ──▶ Postgres (data + pg-boss jobs)
-                            │   ▲
-           POST /v2/agent   │   │ POST /webhooks/bolna (status updates)
-           POST /call       ▼   │
-                        Bolna API ──PSTN call──▶ Target voice agent
-                            │
-           GET /executions  ▼
-                     recording ──▶ R2
-                            │
-                     Jev judge (HTTP) / fallback LLM judge
+Browser ──▶ Next.js (Vercel) ──HTTPS──▶ NestJS (Railway) ──▶ Postgres
+                                              │                Redis (cache + BullMQ)
+                                              │
+                             POST /v2/agent   │   POST /webhooks/bolna
+                             POST /call       ▼
+                                        Bolna API ──PSTN──▶ Target voice agent
+                                              │
+                                       recording ──▶ R2
+                                              │
+                                       Jev scores the call
+                                       Claude writes the brief
 ```
 
 ### Repo layout (after the gate opens)
@@ -37,10 +41,11 @@ kasauti/
   fixtures/             # real execution JSONs from Phase 0 and later
   packages/
     bolna/              # typed Bolna client (grown from scripts/lib/bolna.ts)
-    judge/              # JudgePort, JevJudge, FallbackLLMJudge, prompt, zod schemas, verdict logic
+    judge/              # Jev scores (TypeSafe SDK), Claude brief, quote check
     core/               # transcript parser, metrics, persona compiler (pure functions, unit-tested)
   apps/
-    server/             # NestJS: modules, pages (views/), jobs
+    web/                # Next.js dashboard, shadcn/ui, deployed on Vercel
+    api/                # NestJS: REST, Bolna webhook, BullMQ worker, deployed on Railway
   pnpm-workspace.yaml
 ```
 
@@ -48,18 +53,27 @@ kasauti/
 
 Each milestone has a **done-when** check. Don't start the next one until it passes.
 
-| ID | When | Build | Done when |
-|---|---|---|---|
-| **M0** | Sat Oct 17 | Phase 0 smoke test | `docs/phase0-results.md` says GO |
-| **M1** | Sun Oct 18 | `packages/core` transcript parser + `packages/judge` + `scripts/score-call.ts`; `lang_switcher` persona folder; `scripts/dry-run.ts` | `pnpm score <execution_id>` prints valid scores with evidence for 3 real calls |
-| **M2** | Mon–Tue Oct 19–20 | NestJS skeleton, Drizzle schema, `POST /webhooks/bolna`, deploy to Railway | A real Bolna webhook lands in `webhook_events` on Railway |
-| **M3** | Wed–Thu Oct 21–22 | Persona compiler + sync, run orchestrator (pg-boss), ingest, auto-judge, verdicts | `POST /runs` for 2 personas → both calls scored in the DB with no manual steps |
-| **M4** | Fri–Sat Oct 23–24 | `noisy_market` (noise upload) + `interrupter` personas; pages: targets, new run, live run, report card | All 4 core personas produce scored calls; report card renders |
-| **M5** | Sun Oct 25 | Call detail page, Sehat v2, rerun, compare, fix-suggestion roll-up; **run outside builders' bots** | Real v1 vs v2 numbers; at least one outside bot tested |
-| **M6** | Mon–Tue Oct 26–27 | Share link, consent + rate limits, stretch personas if time | Share links sent to builders |
-| **M7** | Wed–Sat Oct 28–31 | README, demo video, submission | Submitted before noon Oct 31 |
+These match `docs/PLAN.md` §8. Do them in order.
 
-Cut list if behind (cut from the top): stretch personas → share link (use screenshots) → compare page (two screenshots side by side) → fix roll-up (show raw hints). **Never cut:** real calls, Jev scoring with evidence, the v1 → v2 rerun story, real outside users.
+| ID | Build | Done when |
+|---|---|---|
+| **M0** | Phase 0 smoke test | `docs/phase0-results.md` says GO. Done. |
+| **M1** | Parser, Jev scores, Claude brief, `scripts/score-call.ts` | A brief for the three real uncle calls. Scores come from Jev. Every quote is a real line. |
+| **M2** | NestJS, Drizzle schema, `POST /webhooks/bolna`, Railway | A finished call lands in `webhook_events` on Railway |
+| **M3** | Persona sync, BullMQ queue, ingest, auto-judge | A run of 2 callers scores both with no manual step |
+| **M4** | Workspace invite, bot form, library, live run, brief page | We add Sehat in the browser and watch a pack run |
+| **M5** | Custom caller, clinic pack, rerun, compare, call detail | Sehat v2 is a rerun of v1 and compare shows the cells that moved |
+| **M6** | Share link, API key, `POST /v1/runs`, `GET /v1/runs/:id`, cost on the page | A script starts a run and the share link shows the same brief |
+| **M7** | Delivery pack, remaining callers, one outside company, video, submit | That company added their own number and got a link. Submitted before noon 31 Oct 2026 |
+| **M8** | Both transcripts, run history | One call shows both ears. The bot page lists past runs |
+| **M9** | Outbound webhook, sample GitHub Action | Their URL receives the brief |
+| **M10** | Latency from the stereo recording | The latency cell is a number |
+| **M11** | Customer’s own Bolna key | A run bills their key |
+| **M12** | Training mode | The uncle calls a person and the brief scores the person |
+
+M8–M12 start after M7. If time gets short, delay M8–M12. Inside M1–M7, delay the delivery pack and the custom caller before delaying the brief, the queue, the share link, or the outside company.
+
+Schema additions on top of §5, because a company account is now in the product: `workspaces`, `api_keys`, `packs`, and custom callers stored per workspace. Built-in callers still live in `personas/`. A run belongs to a workspace. An API key can only dial a bot that workspace has saved with consent.
 
 ## 3. Bolna client (`packages/bolna`)
 
@@ -217,7 +231,7 @@ create table webhook_events (
 );
 ```
 
-## 6. Run pipeline (pg-boss jobs)
+## 6. Run pipeline (BullMQ jobs)
 
 ```
 POST /runs ─▶ run.start ─▶ (for each persona) call.place ─▶ Bolna dials
@@ -258,61 +272,33 @@ Share of letters in the Devanagari block (U+0900–U+097F): > 0.5 → `hi`, < 0.
 - Bolna fields: `duration_s`, `hangup_by`, `hangup_reason`, `ttfa_ms`
 - `latency_dead_air`: **grey "n/a"** in the MVP (needs the audio service, §11)
 
-## 8. Judge (`packages/judge`)
+## 8. Judge and brief (`packages/judge`)
 
-### Interface
-```ts
-export type Dimension =
-  | 'task_completion' | 'hallucination' | 'language_switch' | 'dropped_intents'
-  | 'interruption_handling' | 'repair' | 'tone_empathy';   // latency_dead_air is scored in code
+Two models, two jobs. [Jev](https://docs.typesafe.ai/introduction) returns a score. Claude writes the sentences. Code checks that any quoted line is actually in the transcript.
 
-export interface JevRequest {
-  rubric_id: 'kasauti.call.v1';
-  dimensions: Dimension[];
-  context: {
-    target_name: string;
-    target_task_goal: string;
-    facts: Record<string, unknown>;
-    persona: { id: string; goal: string; language_plan?: string; success_criteria: string[] };
-    metrics: Record<string, unknown>;
-  };
-  transcript: { idx: number; speaker: 'persona' | 'target'; text: string }[];
-  target_side_transcript?: string;
-}
+### Jev scores the call
 
-export interface JevDimensionScore {
-  dimension: Dimension;
-  score: 0 | 1 | 2 | 3 | 4 | 5;
-  evidence: { turn_idx: number; quote: string; why: string }[];
-  fix_hint?: string;
-}
+One request to `POST https://api.typesafe.ai/v1/systemone` with `model: "jev-latest"`. Use `@typesafe-ai/sdk` (`TypeSafeClient.systemOne`). Auth is `TYPESAFE_API_KEY`.
 
-export interface JevResponse {
-  rubric_id: string;
-  judge_version: string;
-  scores: JevDimensionScore[];
-  caller_asks: string[];
-  hallucinated_claims: { turn_idx: number; claim: string; contradicts: string | null }[];
-  summary: string;
-}
+The state is the facts sheet, the bot's task, the caller's goal, and the numbered turns. The questions are one [Score](https://docs.typesafe.ai/primitives/score) per dimension, all in that same request. A Score takes an ordered list of levels. Ours is six levels, index 0 through 5, using the anchors in `docs/ORIGINAL_SPEC.md` §5.1. Jev answers with a probability-weighted `score` (it can fall between levels), a probability per level, and a `confidence`.
 
-export interface JudgePort { score(req: JevRequest): Promise<JevResponse>; }
-```
-- `JevJudge` calls Jev over HTTP (`JEV_URL`). **Jev's real API isn't in the repo yet; ask Nilamadhab for it and adapt only this class.**
-- `FallbackLLMJudge` sends the same prompt to Claude or OpenAI with JSON output. Selected when `JEV_URL` is unset or Jev fails. A Jev outage must never block a demo.
-- System prompt: copy verbatim from `docs/ORIGINAL_SPEC.md` §5.4. Temperature 0.
+Dimensions in that request: `task_completion`, `hallucination`, `language_switch`, `dropped_intents`, `interruption_handling`, `repair`, `tone_empathy`. Latency stays grey until the audio service exists.
 
-### Validation (reject and retry once, then store `null` + "needs review")
-- Output parses against the zod schema.
-- Every score < 5 has ≥ 1 evidence item.
-- Each `evidence.turn_idx` exists **and is a target turn**.
-- Each `quote` appears in that turn's text after normalising whitespace and case (catches invented quotes).
+Code, not the model, turns the answer into a cell:
 
-### Verdicts
-- Dimension: green ≥ 4, amber = 3, red ≤ 2, grey = null/n/a.
+- Round the weighted score to the nearest integer, 0–5.
+- Green ≥ 4, amber = 3, red ≤ 2.
+- Confidence under 0.6: the cell is grey, "needs review", and the number is still stored. The first three clinic calls sat mostly between 0.45 and 0.82, so the 0.8 bar from TypeSafe's citation check hid failures that were scored 0 or 1.
 - Persona call: **red** if any critical dimension ≤ 2, or `hallucination` ≤ 2, or the call made no progress (`target_turns < 2` or status not `completed`). **Green** if every critical dimension ≥ 4 and nothing is red. Else amber.
 - Run pass rate = green / total.
-- Headline demo numbers (optional): judge twice, keep the lower score per dimension.
+
+### Claude writes the brief
+
+Claude receives the turns and the Jev scores. It returns three things: one sentence on what broke, one verbatim quote from a **target** turn, and one prompt line to add. It does not choose the score.
+
+The quote must appear in that turn after normalising whitespace and case. If it does not, retry Claude once. If it still does not, the brief has no quote and the cell says needs review.
+
+Then one Jev [Choice](https://docs.typesafe.ai/primitives/choice): does this quote support the failure, contradict it, or say nothing about it? A quote that does not support the failure is dropped. This is the same shape as TypeSafe's citation check.
 
 ## 9. Server routes and pages (NestJS)
 
@@ -330,7 +316,9 @@ export interface JudgePort { score(req: JevRequest): Promise<JevResponse>; }
 | POST | `/webhooks/bolna` | Bolna status webhook |
 | GET | `/healthz` | Health |
 
-### Pages (Handlebars, Tailwind CDN)
+### Pages (Next.js + shadcn/ui)
+
+The browser talks only to the Next app. The Next app calls the Nest API. Shadcn components, styled to `docs/UI.md` (paper, black text, one ochre mark, serif verdict).
 | Path | Page |
 |---|---|
 | `/` | Targets list + "New target" |
@@ -363,7 +351,9 @@ Small Python FastAPI service: download recording → ffmpeg 16 kHz → split cha
 `vitest` unit tests for: transcript parser, language tagging, metrics, persona compiler (snapshot), judge validator (fake quotes rejected, non-target turn rejected), verdict logic, allowlist check. Use real fixtures. No tests that dial phones.
 
 ## 14. Deployment
-Railway: one service (`apps/server`, `pnpm --filter server start`) + Postgres plugin. Env vars from `.env.example`. Set `PUBLIC_BASE_URL` so persona agents get `webhook_url = ${PUBLIC_BASE_URL}/webhooks/bolna?s=${WEBHOOK_SECRET}`. Re-run `/personas/sync` after changing the URL.
+- **Vercel:** `apps/web`. `API_URL` points at the Railway API.
+- **Railway:** `apps/api` (HTTP and the BullMQ worker), Postgres, Redis. Env vars from `.env.example`.
+- `PUBLIC_BASE_URL` is the Railway API origin. Persona agents get `webhook_url = ${PUBLIC_BASE_URL}/webhooks/bolna?s=${WEBHOOK_SECRET}`. Re-run `/personas/sync` after changing the URL.
 
 ## 15. Open questions (verify, don't guess)
 | # | Question | Where to check |
@@ -376,4 +366,4 @@ Railway: one service (`apps/server`, `pnpm --filter server start`) + Postgres pl
 | 6 | Does Sarvam STT support `endpointing`? Which code-switching STT + language pairs are accepted? | Bolna docs / 400 errors |
 | 7 | Custom webhook headers via API, or only dashboard? | Bolna docs |
 | 8 | Buildathon credits? | Bolna Slack |
-| 9 | Jev's real API shape | Nilamadhab |
+| 9 | Jev's API | Resolved. `POST https://api.typesafe.ai/v1/systemone`, model `jev-latest`, SDK `@typesafe-ai/sdk`. See §8. |

@@ -1,0 +1,23 @@
+{
+  "id": "angry_uncle",
+  "name": "Angry Hinglish refund uncle",
+  "domain": "lender",
+  "target_name": "RupeeSetu Finance",
+  "user_data": {
+    "target_name": "RupeeSetu Finance",
+    "goal": "Receive a concrete refund timeline or a confirmed callback time from a manager or escalation team, with his loan account number LN-883201 and callback number recorded.",
+    "seed_script": "1. Open with the complaint: loan LN-883201 was closed last month but auto-debit still took ₹4,850 twice this month, demand immediate ₹9,700 refund.\n2. Reject any generic apology or vague 'we will check' — insist on a concrete refund date or timeline.\n3. Ask to speak to a manager or escalation team when the agent cannot commit to a timeline.\n4. Accept a callback offer only if the agent gives a specific time window (e.g. 'within 24 hours' or 'tomorrow 2–4 PM') and confirms the callback number.\n5. Confirm the agent has noted the loan account number LN-883201 and the correct callback number before ending the call."
+  },
+  "success_criteria": [
+    "Acknowledges the specific issue: loan account LN-883201 was closed but auto-debit still deducted ₹9,700 (two EMIs of ₹4,850).",
+    "Does not promise an immediate refund or a timeline the bot cannot authorize; instead offers escalation or callback.",
+    "Offers a concrete callback time window (e.g. 'within 24 hours' or 'by tomorrow evening') or escalates to a manager.",
+    "Captures and confirms the loan account number LN-883201 and the caller's callback number.",
+    "Remains polite and patient despite the caller's irritation, never dismisses the complaint or becomes defensive."
+  ],
+  "critical_dimensions": [
+    "hallucination",
+    "task_completion",
+    "tone_empathy"
+  ]
+}

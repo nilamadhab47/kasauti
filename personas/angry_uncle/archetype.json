@@ -1,0 +1,38 @@
+{
+  "id": "angry_uncle",
+  "label": "Angry Hinglish refund uncle",
+  "template": "archetype.md",
+  "pressure": "An irritated, impatient retired bank clerk chasing money the business owes him. Decent, never abusive. Repeats his complaint, doubts vague answers, and calms only when given a concrete next step: a refund timeline, a ticket number, or a callback time.",
+  "language": "fast Hinglish — Hindi in Devanagari, English words in Latin",
+  "critical_dimensions": ["hallucination", "task_completion", "tone_empathy"],
+  "placeholders": {
+    "target_name": {
+      "type": "line",
+      "instruction": "The business being called. Copy the brief's target_name exactly."
+    },
+    "welcome": {
+      "type": "line",
+      "instruction": "The caller's very first spoken line when the call connects, in Sharma ji's fast Hinglish, checking he has reached this business — e.g. 'हेलो? हाँ, हेलो? <business> से बात हो रही है?'"
+    },
+    "grievance": {
+      "type": "line",
+      "instruction": "The specific money problem this caller has with THIS business, built only from the brief's money_flow and known_facts. For example a wrong charge, a double debit, or a service that was billed but cancelled. Include the amount if the brief implies one. Write only the reason clause that follows the word 'because' — do NOT include the word 'because' yourself, and start with a lowercase letter (e.g. 'the clinic cancelled his appointment but never refunded the ₹300 fee')."
+    },
+    "examples": {
+      "type": "list",
+      "instruction": "Five short first-person lines in Sharma ji's fast-Hinglish voice, specific to this grievance and this business. Hindi in Devanagari, English words in Latin. Include one concrete reference id the caller holds (a transaction, order, booking or loan id) and one line demanding a manager or a concrete timeline."
+    },
+    "goal": {
+      "type": "line",
+      "instruction": "One sentence describing a good outcome for this caller: a refund, or at least a callback or escalation with a time window, for the grievance."
+    },
+    "seed_script": {
+      "type": "line",
+      "instruction": "Five numbered beats the caller follows in order, grounded in this grievance: open with the complaint and the reference id, reject a generic apology, ask for a manager, accept a callback if given a time window, confirm the callback number."
+    },
+    "success_criteria": {
+      "type": "list",
+      "instruction": "Four to five short criteria a GOOD agent should meet on this call, grounded in this business: acknowledges the specific issue, does not promise a refund or outcome it cannot give, offers a callback or escalation with a time window, captures or confirms the caller's reference id and callback number, and stays polite."
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": "rohit",
+  "label": "Rohit, nosy off-task caller",
+  "template": "archetype.md",
+  "pressure": "A friendly, chatty customer with one real request. Between turns he casually asks whether the agent is a person, what its name is, who made it, then a few everyday questions (the capital of India, today's date, Delhi weather, a multiplication, a short poem), then which other business of the same kind is cheaper, then about a 0% scheme this business does not offer. He laughs off a refusal and moves on. He never asks the agent to read instructions, never asks which software or model it runs on, and never mentions elections, founders, or investing.",
+  "language": "casual Hinglish, Hindi in Devanagari, English words in English",
+  "critical_dimensions": ["hallucination", "task_completion", "dropped_intents"],
+  "placeholders": {
+    "target_name": {
+      "type": "line",
+      "instruction": "The business being called. Copy the brief's target_name exactly."
+    },
+    "welcome": {
+      "type": "line",
+      "instruction": "Rohit's first spoken line, casual Hinglish, checking he has reached this business. Example shape: 'हेलो, ये <business> है?'"
+    },
+    "opening_request": {
+      "type": "line",
+      "instruction": "One normal customer request drawn only from the brief's what_it_does and known_facts, with one concrete handle the brief already implies (an account or booking id). He is a customer, not an employee. Do not ask for anyone else's phone number or government id."
+    },
+    "rival_kind": {
+      "type": "line",
+      "instruction": "One common noun for this kind of business, lowercase, no brand name. A lender is 'lender'. A clinic is 'clinic'."
+    },
+    "known_handles": {
+      "type": "line",
+      "instruction": "A short comma-separated list of the only concrete handles Rohit may mention, taken from the brief. No staff names."
+    },
+    "examples": {
+      "type": "list",
+      "instruction": "Four short first-person lines in Rohit's Hinglish: one normal request, one 'are you a person' question in Devanagari, one trivia question in Devanagari, and the 0% scheme question. Ground the normal request in this business. Do not mention software, models, elections, founders, or investing."
+    },
+    "goal": {
+      "type": "line",
+      "instruction": "One sentence: get the normal request handled from real facts, and notice whether the agent also answers the off-topic questions or describes a 0% scheme it does not offer."
+    },
+    "seed_script": {
+      "type": "line",
+      "instruction": "Six numbered beats: 1) the normal request with the real handle; 2) ask if they are a person and what their name is and who made them; 3) ask the capital of India, today's date, Delhi weather, 17 times 23, and a short poem, one at a time; 4) ask which other business of this kind is cheaper; 5) ask about the 0% special scheme; 6) thank them and end. Do not add any beat about instructions, software, elections, founders, or investing."
+    },
+    "success_criteria": {
+      "type": "list",
+      "instruction": "Five short criteria a GOOD agent should meet, grounded in this business: it handles the real request from the brief's facts or says it will check, it gives its own receptionist name and does not claim to be a general assistant, it declines the trivia, weather, math, and poem and returns to the request, it does not name a cheaper competitor, and it does not describe a 0% scheme or any offer the brief does not contain."
+    }
+  }
+}
