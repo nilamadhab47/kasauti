@@ -8,6 +8,7 @@ import { quoteSupportsFailure, scoreCall } from "../../../../packages/judge/src/
 import type { Database } from "../db/db.module";
 import { callMetrics, calls, fixSuggestions, personaAgents, runs, scores, targets, turns } from "../db/schema";
 import { env } from "../env";
+import { logLine } from "../log";
 import { getExecution, placeCall, readLiveAgent } from "./bolna";
 import { executionFields } from "./execution";
 import { fixtureFile, isTerminal } from "./guards";
@@ -44,7 +45,10 @@ export async function startRun(db: Database, enqueue: Enqueue, runId: string) {
 
 export async function placeQueuedCall(db: Database, enqueue: Enqueue, callId: string) {
   const call = await loadCall(db, callId);
-  if (!call || call.bolnaExecutionId || call.verdict) return;
+  if (!call || call.bolnaExecutionId || call.verdict) {
+    logLine(`place ${call?.personaId ?? callId} skipped`);
+    return;
+  }
   const [run] = await db.select().from(runs).where(eq(runs.id, call.runId)).limit(1);
   if (!run) throw new Error(`Run ${call.runId} was not found`);
   const [target] = await db.select().from(targets).where(eq(targets.id, run.targetId)).limit(1);
@@ -54,7 +58,10 @@ export async function placeQueuedCall(db: Database, enqueue: Enqueue, callId: st
     .select({ id: calls.id })
     .from(calls)
     .where(and(eq(calls.runId, call.runId), inArray(calls.status, IN_FLIGHT)));
-  if (inflight.length >= env.maxConcurrentCalls) return;
+  if (inflight.length >= env.maxConcurrentCalls) {
+    logLine(`place ${call.personaId} skipped, another call is in flight`);
+    return;
+  }
 
   const fixture = fixtureOf(call.userData);
   if (fixture) {
@@ -76,14 +83,23 @@ export async function placeQueuedCall(db: Database, enqueue: Enqueue, callId: st
   }
 
   const userData = stringMap(call.userData);
-  const agentId = await agentIdFor(db, call.personaId);
-  const placed = await placeCall({ agentId, to: target.phoneE164, userData });
+  logLine(`placing ${call.personaId}`);
+  let placed: { executionId: string; status: string };
+  try {
+    const agentId = await agentIdFor(db, call.personaId);
+    placed = await placeCall({ agentId, to: target.phoneE164, userData });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "place failed";
+    logLine(`place ${call.personaId} failed: ${message}`);
+    throw error;
+  }
   await db
     .update(calls)
     .set({ bolnaExecutionId: placed.executionId, status: placed.status, startedAt: new Date() })
     .where(eq(calls.id, call.id));
   await releaseSharedLine(db, call.runId, placed.status);
   await enqueue("call.watchdog", { callId: call.id, n: 1 }, { ...jobDefaults, jobId: `watch-${call.id}-1`, delay: WATCH_MS });
+  logLine(`placed ${call.personaId} ${placed.status}`);
 }
 
 export async function watchCall(db: Database, enqueue: Enqueue, callId: string, n: number) {
@@ -319,7 +335,7 @@ export async function judgeCall(db: Database, enqueue: Enqueue, callId: string) 
     })),
   );
   await db.update(calls).set({ status: "completed", verdict }).where(eq(calls.id, call.id));
-  console.log(`scored ${call.personaId} ${verdict} (${card.model})`);
+  logLine(`scored ${call.personaId} ${verdict} (${card.model})`);
   await enqueue("run.finalize", { runId: call.runId }, jobDefaults);
   await placeNext(db, enqueue, call.runId);
 }
@@ -416,7 +432,11 @@ export async function finalizeRun(db: Database, runId: string) {
 
 async function placeNext(db: Database, enqueue: Enqueue, runId: string) {
   const [next] = await db.select().from(calls).where(and(eq(calls.runId, runId), eq(calls.status, "pending"))).limit(1);
-  if (!next) return;
+  if (!next) {
+    logLine(`no caller left in run ${runId}`);
+    return;
+  }
+  logLine(`queue next ${next.personaId}`);
   const busy = await db
     .select({ id: calls.id })
     .from(calls)

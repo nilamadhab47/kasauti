@@ -5,6 +5,7 @@ dist/
 .env.local
 /runs/
 .agent_id
+!personas/*/.agent_id
 .ambient_id
 .DS_Store
 .cursor/

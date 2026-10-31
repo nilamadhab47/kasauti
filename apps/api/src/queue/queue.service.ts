@@ -2,6 +2,7 @@ import { Inject, Injectable, OnModuleDestroy, OnModuleInit } from "@nestjs/commo
 import { Queue, Worker, type JobsOptions } from "bullmq";
 import { DB, type Database } from "../db/db.module";
 import { finalizeRun, ingestCall, judgeCall, noteExecution, placeQueuedCall, startRun, watchCall, type Enqueue } from "./pipeline";
+import { logLine } from "../log";
 import { replayFinishedJob } from "./replay";
 import { newRedis } from "./redis";
 
@@ -33,7 +34,9 @@ export class QueueService implements OnModuleInit, OnModuleDestroy {
       { connection: this.workerRedis, prefix: "kasauti", concurrency: 2, lockDuration: 180_000 },
     );
     this.worker.on("failed", (job, error) => {
-      console.error(`job ${job?.name ?? "unknown"} failed: ${error.message}`);
+      const attempt = job?.attemptsMade ?? 0;
+      const left = job ? Math.max(job.opts.attempts ?? 1, 1) - attempt : 0;
+      logLine(`job ${job?.name ?? "unknown"} failed attempt ${attempt}, ${left} left: ${error.message}`);
     });
   }
 
