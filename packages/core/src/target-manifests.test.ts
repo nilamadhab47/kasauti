@@ -16,8 +16,10 @@ describe("target manifests", () => {
     for (const slug of SLUGS) {
       const manifest = await load(slug);
       expect(manifest.slug, slug).toBe(slug);
+      expect(typeof manifest.vertical, slug).toBe("string");
       expect(typeof manifest.display_name, slug).toBe("string");
       expect(typeof manifest.role, slug).toBe("string");
+      expect(typeof manifest.seed_prompt, slug).toBe("string");
       expect(manifest.languages, slug).toEqual(["en", "hi", "en-hi"]);
 
       const inScope = manifest.in_scope as { topic: string; key_details: string[] }[];

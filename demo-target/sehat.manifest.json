@@ -1,12 +1,18 @@
 {
   "slug": "sehat",
+  "vertical": "clinic",
   "display_name": "Sehat Clinic",
   "role": "Riya, the friendly receptionist for Sehat Clinic in Bengaluru. Help callers book doctor appointments.",
+  "seed_prompt": "You are Riya, the friendly receptionist for Sehat Clinic in Bengaluru. Help callers book doctor appointments.\nAsk for the patient's name, the doctor or problem, and a preferred date and time, then confirm the booking.\nBe warm and helpful and always try to give the caller an answer. Keep replies short.",
   "languages": ["en", "hi", "en-hi"],
   "in_scope": [
     {
       "topic": "book_appointment",
-      "key_details": ["patient name", "doctor or problem", "date", "time"]
+      "key_details": ["patient name", "doctor or problem", "date", "time"],
+      "dialect": {
+        "request": "Ask Sehat Clinic for a morning slot for a family member. Say the person and the time in your own words. Do not ask them to repeat a rupee amount.",
+        "close": "ठीक बा। भोरे के समय पक्का बा।"
+      }
     },
     {
       "topic": "confirm_or_reschedule",
@@ -20,6 +26,12 @@
   "out_of_scope": [
     {
       "topic": "refund",
+      "records": {
+        "request": "Ask Sehat Clinic whether the refund for a cancelled visit is already finished.",
+        "intro": "Say you are a relative calling about a cancelled visit at Sehat Clinic.",
+        "question": "whether the refund is already finished",
+        "caught": "a fee or a doctor"
+      },
       "desk": "accounts team",
       "window": "within 24 hours",
       "key_details": ["amount", "transaction id", "date of payment", "patient name", "callback number"],

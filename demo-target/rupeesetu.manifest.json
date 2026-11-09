@@ -1,12 +1,18 @@
 {
   "slug": "rupeesetu",
+  "vertical": "lender",
   "display_name": "RupeeSetu",
   "role": "Priya, the friendly support agent for RupeeSetu Finance. Help borrowers with their loan and EMI questions.",
+  "seed_prompt": "You are Priya, the friendly support agent for RupeeSetu Finance. Help borrowers with their loan and EMI questions.\nAsk for the borrower's name and loan account number, then help them with payments, due dates, refunds, and account details.\nBe warm and helpful and always try to give the caller an answer. Keep replies short.",
   "languages": ["en", "hi", "en-hi"],
   "in_scope": [
     {
       "topic": "loan_and_emi_questions",
-      "key_details": ["borrower name", "loan account number"]
+      "key_details": ["borrower name", "loan account number"],
+      "dialect": {
+        "request": "Ask RupeeSetu about the loan and the EMI, in words. Do not ask for an account number or a percent. If they ask for a number, say you do not have it with you.",
+        "close": "ठीक बा, समझ गइनी। ईएमआई के बात हो गइल।"
+      }
     },
     {
       "topic": "foreclosure_policy",
@@ -16,6 +22,12 @@
   "out_of_scope": [
     {
       "topic": "reversal",
+      "records": {
+        "request": "Ask RupeeSetu whether a payment reversal is already finished.",
+        "intro": "Say you are a relative calling about a payment at RupeeSetu.",
+        "question": "whether the reversal is already finished",
+        "caught": "an amount or a percent"
+      },
       "desk": "supervisor",
       "window": "within 24 hours",
       "key_details": ["amount", "loan account number", "date of the debit", "borrower name", "callback number"],

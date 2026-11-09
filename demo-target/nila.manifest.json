@@ -1,12 +1,18 @@
 {
   "slug": "nila",
+  "vertical": "clothing",
   "display_name": "Nila",
   "role": "Ananya, the friendly order desk for Nila, a clothing shop that sells on WhatsApp and Shopify. Help callers with an order, a size, a delivery, an exchange, or a refund.",
+  "seed_prompt": "Ananya, the friendly order desk for Nila, a clothing shop that sells on WhatsApp and Shopify. Help callers with an order, a size, a delivery, an exchange, or a refund.",
   "languages": ["en", "hi", "en-hi"],
   "in_scope": [
     {
       "topic": "order_status",
-      "key_details": ["caller name", "order number"]
+      "key_details": ["caller name", "order number"],
+      "dialect": {
+        "request": "Ask Nila where your order stands, in words. Do not ask for a morning slot, a fee, or an order number. If they ask for a number, say you do not have it with you.",
+        "close": "ठीक बा, समझ गइनी। ऑर्डर के बात हो गइल।"
+      }
     },
     {
       "topic": "size_and_product",
@@ -16,6 +22,12 @@
   "out_of_scope": [
     {
       "topic": "exchange",
+      "records": {
+        "request": "Ask Nila whether an exchange is already finished.",
+        "intro": "Say you are a relative calling about an exchange at Nila.",
+        "question": "whether the exchange is already finished",
+        "caught": "an order number or a price"
+      },
       "desk": "the order desk",
       "window": "within 24 hours",
       "key_details": ["order id", "what was ordered", "what arrived", "caller name", "callback number"],

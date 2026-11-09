@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
+// content.ts, not the package barrel: that barrel's .js specifiers do not resolve in Next.
+import { catalogRoot, loadFileContentStore } from "../../../../../packages/core/src/content.ts";
 import { AGENT_BRIEFS, type TestAgent } from "@/lib/agent-briefs";
-import { AGENT_CATEGORY, isCategoryId, type CategoryId } from "@/lib/caller-packs";
+import { isCategoryId, type CategoryId } from "@/lib/caller-packs";
 import { DEMO_FIXTURES, FIXTURE_PHONE, RUN_API_BASE } from "@/lib/run-api";
 
 const DEMO_AGENTS = ["sehat", "rupeesetu", "swaad", "nila", "nivas"] as const;
@@ -33,7 +35,8 @@ export async function POST(request: Request) {
 
   const live = body.mode === "live";
   const agent = DEMO_AGENTS.includes(body.agent as (typeof DEMO_AGENTS)[number]) ? (body.agent as TestAgent) : null;
-  const category: CategoryId | null = isCategoryId(body.category) ? body.category : agent ? AGENT_CATEGORY[agent] : null;
+  const fromDesk = agent ? (await loadFileContentStore(catalogRoot())).verticalOf(agent) : null;
+  const category: CategoryId | null = isCategoryId(body.category) ? body.category : isCategoryId(fromDesk) ? fromDesk : null;
   const name = body.name?.trim() || (agent ? AGENT_BRIEFS[agent].name : "Sehat Clinic");
   const taskGoal = body.taskGoal?.trim() || (agent ? AGENT_BRIEFS[agent].prompt : "");
 

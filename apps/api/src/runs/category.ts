@@ -1,27 +1,21 @@
-import { loadTargetManifest } from "../../../../packages/core/src/index.ts";
+import { loadFileContentStore, loadTargetManifest } from "../../../../packages/core/src/index.ts";
 
 export const CATEGORY_IDS = ["clinic", "lender", "restaurant", "clothing", "property"] as const;
 export type CategoryId = (typeof CATEGORY_IDS)[number];
 
-export const SLUG_OF = {
-  clinic: "sehat",
-  lender: "rupeesetu",
-  restaurant: "swaad",
-  clothing: "nila",
-  property: "nivas",
-} as const;
+const stores = new Map<string, ReturnType<typeof loadFileContentStore>>();
 
-const PERSONA_IDS = ["angry_uncle", "lang_switcher", "dialect_bhojpuri", "staff_probe", "records_raider", "rohit"] as const;
-
-export function isPersonaId(value: string): value is (typeof PERSONA_IDS)[number] {
-  return (PERSONA_IDS as readonly string[]).includes(value);
+function catalog(root: string) {
+  const pending = stores.get(root) ?? loadFileContentStore(root);
+  stores.set(root, pending);
+  return pending;
 }
 
-/** Category label from the callers page, to the manifest that bot actually uses. */
-export function slugFor(category: CategoryId): (typeof SLUG_OF)[CategoryId] {
-  return SLUG_OF[category];
+/** The desk slug for a vertical. The pairing lives on the manifest, not in this file. */
+export async function slugFor(root: string, category: CategoryId): Promise<string> {
+  return (await catalog(root)).deskFor(category);
 }
 
-export async function manifestFor(repoRoot: string, category: CategoryId) {
-  return loadTargetManifest(repoRoot, slugFor(category));
+export async function manifestFor(root: string, category: CategoryId) {
+  return loadTargetManifest(root, await slugFor(root, category));
 }

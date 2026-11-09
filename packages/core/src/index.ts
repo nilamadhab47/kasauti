@@ -1,3 +1,5 @@
+export { catalogRoot, loadFileContentStore, FileContentStore } from "./content.js";
+export type { Category, CategoryId, ContentStore, ContentVersion, Intent, LanguageCode, Persona, PersonaId, Rubric, Trait } from "./content.js";
 export { callerBrief, judgeView, withoutCodes } from "./caller-brief.js";
 export type { CallerBrief } from "./caller-brief.js";
 export { loadPersonaProfile, loadTargetManifest, manifestSlugOf, parsePersonaProfile, parseTargetManifest, personaProfileSchema, targetManifestSchema } from "./manifest.js";

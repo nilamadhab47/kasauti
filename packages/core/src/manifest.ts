@@ -2,9 +2,23 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { z } from "zod";
 
+const dialectAsk = z.object({
+  request: z.string().min(1),
+  close: z.string().min(1),
+});
+
+const recordsAsk = z.object({
+  request: z.string().min(1),
+  intro: z.string().min(1),
+  question: z.string().min(1),
+  caught: z.string().min(1),
+});
+
 const scopeItem = z.object({
   topic: z.string().min(1),
   key_details: z.array(z.string().min(1)).min(1),
+  dialect: dialectAsk.optional(),
+  records: recordsAsk.optional(),
 });
 
 const outOfScopeItem = scopeItem.extend({
@@ -15,8 +29,10 @@ const outOfScopeItem = scopeItem.extend({
 
 export const targetManifestSchema = z.object({
   slug: z.string().min(1),
+  vertical: z.string().min(1),
   display_name: z.string().min(1),
   role: z.string().min(1),
+  seed_prompt: z.string().min(1),
   languages: z.array(z.string().min(1)).min(1),
   in_scope: z.array(scopeItem).min(1),
   out_of_scope: z.array(outOfScopeItem).min(1),

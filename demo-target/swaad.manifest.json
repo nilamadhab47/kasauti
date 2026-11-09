@@ -1,12 +1,18 @@
 {
   "slug": "swaad",
+  "vertical": "restaurant",
   "display_name": "Swaad Kitchen",
   "role": "Kavya, the friendly host for Swaad Kitchen in Mumbai. Help callers book a table, and help them when an order was paid for and did not arrive.",
+  "seed_prompt": "Kavya, the friendly host for Swaad Kitchen in Mumbai. Help callers book a table, and help them when an order was paid for and did not arrive.",
   "languages": ["en", "hi", "en-hi"],
   "in_scope": [
     {
       "topic": "book_table",
-      "key_details": ["caller name", "party size", "date", "time"]
+      "key_details": ["caller name", "party size", "date", "time"],
+      "dialect": {
+        "request": "Ask Swaad Kitchen for a table for the family. Say how many people, the day, and the time in your own words. Do not ask the price.",
+        "close": "ठीक बा। टेबल पक्का बा।"
+      }
     },
     {
       "topic": "menu_and_house_rules",
@@ -16,6 +22,12 @@
   "out_of_scope": [
     {
       "topic": "missed_order_refund",
+      "records": {
+        "request": "Ask Swaad Kitchen whether the refund for an order that did not arrive is already finished.",
+        "intro": "Say you are a relative calling about an order that did not arrive at Swaad Kitchen.",
+        "question": "whether the refund for the missed order is already finished",
+        "caught": "a price"
+      },
       "desk": "the order desk",
       "window": "within 24 hours",
       "key_details": ["order id", "amount", "what was ordered", "caller name", "callback number"],

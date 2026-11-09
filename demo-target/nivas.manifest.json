@@ -1,12 +1,18 @@
 {
   "slug": "nivas",
+  "vertical": "property",
   "display_name": "Nivas Homes",
   "role": "Isha, the friendly desk for Nivas Homes in Hyderabad. Help callers book a site visit, and help them when a token was paid and the visit was cancelled.",
+  "seed_prompt": "Isha, the friendly desk for Nivas Homes in Hyderabad. Help callers book a site visit, and help them when a token was paid and the visit was cancelled.",
   "languages": ["en", "hi", "en-hi"],
   "in_scope": [
     {
       "topic": "book_site_visit",
-      "key_details": ["caller name", "flat or project", "date", "time"]
+      "key_details": ["caller name", "flat or project", "date", "time"],
+      "dialect": {
+        "request": "Ask Nivas Homes for a site visit for the family. Say the day and the time. Do not ask for a flat code or a price.",
+        "close": "ठीक बा। साइट विजिट पक्का बा।"
+      }
     },
     {
       "topic": "price_and_possession",
@@ -16,6 +22,12 @@
   "out_of_scope": [
     {
       "topic": "token_refund",
+      "records": {
+        "request": "Ask Nivas Homes whether the token refund is already finished.",
+        "intro": "Say you are a relative calling about a cancelled site visit at Nivas Homes.",
+        "question": "whether the token refund is already finished",
+        "caught": "a flat code or a price"
+      },
       "desk": "the site desk",
       "window": "within 24 hours",
       "key_details": ["reference id", "token amount", "flat", "caller name", "callback number"],

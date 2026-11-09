@@ -1,7 +1,7 @@
 import { appendFile, mkdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { callerBrief, loadPersonaProfile, loadTargetManifest } from "../packages/core/src/index.ts";
-import { CATEGORY_IDS, CATEGORY_AGENT, type CategoryId } from "../apps/web/lib/caller-packs.ts";
+import { callerBrief, loadFileContentStore, loadPersonaProfile, loadTargetManifest } from "../packages/core/src/index.ts";
+import { CATEGORY_IDS } from "../apps/web/lib/caller-packs.ts";
 import { bolna } from "./lib/bolna.js";
 import { env, repoRoot } from "./lib/env.js";
 
@@ -26,7 +26,7 @@ if (!(CATEGORY_IDS as readonly string[]).includes(category)) {
   console.error(`Unknown category "${category}". Known: ${CATEGORY_IDS.join(", ")}`);
   process.exit(1);
 }
-const slug = CATEGORY_AGENT[category as CategoryId];
+const slug = (await loadFileContentStore(repoRoot)).deskFor(category);
 const profile = await loadPersonaProfile(repoRoot, personaId);
 const manifest = await loadTargetManifest(repoRoot, slug);
 const brief = callerBrief(profile, manifest);

@@ -119,7 +119,7 @@ export class RunsService {
       throw new BadRequestException(error instanceof Error ? error.message : "Number is not allowed");
     }
 
-    const slug = manifestSlugOf(input.name) ?? (category ? slugFor(category) : null);
+    const slug = manifestSlugOf(input.name) ?? (category ? await slugFor(repoRoot, category) : null);
     const manifest = slug ? await loadTargetManifest(repoRoot, slug) : null;
     const facts = input.facts_text?.trim() ? { sheet: input.facts_text.trim() } : manifest?.facts ?? {};
     const taskGoal = input.task_goal ?? manifest?.role ?? TARGET_TASK;
@@ -659,7 +659,7 @@ export class RunsService {
   async openDesk(slug: string) {
     const agentId = demoAgentId(slug);
     const manifest = await loadTargetManifest(repoRoot, slug);
-    const draft = initialPromptFor(slug, manifest.role);
+    const draft = initialPromptFor(manifest);
     const agent = (await demoBolna("GET", `/v2/agent/${agentId}`)) as Record<string, unknown>;
     const phone = (await this.inbound.sharedPhone()) ?? "";
     if (phone) {
@@ -703,11 +703,11 @@ export class RunsService {
     return { ok: true, footer: hasKasautiFooter(liveAgentOf(agent).systemPrompt) };
   }
 
-  /** Replace the live prompt with the manifest role. The welcome and the task list stay. */
+  /** Replace the live prompt with the desk's seed prompt. The welcome and the task list stay. */
   async resetDesk(slug: string) {
     const agentId = demoAgentId(slug);
     const manifest = await loadTargetManifest(repoRoot, slug);
-    const draft = initialPromptFor(slug, manifest.role);
+    const draft = initialPromptFor(manifest);
     const agent = (await demoBolna("GET", `/v2/agent/${agentId}`)) as Record<string, unknown>;
     if (liveAgentOf(agent).systemPrompt.trim() === draft) {
       throw new BadRequestException("This desk is already on the first draft.");

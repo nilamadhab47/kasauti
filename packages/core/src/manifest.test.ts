@@ -27,8 +27,10 @@ describe("manifest loaders", () => {
     expect(() =>
       parseTargetManifest("sehat.manifest.json", {
         slug: "sehat",
+        vertical: "clinic",
         display_name: "Sehat Clinic",
         role: "Riya",
+        seed_prompt: "You are Riya.",
         languages: ["en"],
         in_scope: [{ topic: "book_appointment", key_details: ["name"] }],
         out_of_scope: [{ topic: "refund", key_details: ["amount"] }],

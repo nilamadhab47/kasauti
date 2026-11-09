@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { callerBrief, loadPersonaProfile, loadTargetManifest } from "../packages/core/src/index.ts";
-import { CATEGORY_AGENT, PERSONA_IDS, type PersonaId } from "../apps/web/lib/caller-packs.ts";
+import { callerBrief, loadFileContentStore, loadPersonaProfile, loadTargetManifest } from "../packages/core/src/index.ts";
+import { PERSONA_IDS, type PersonaId } from "../apps/web/lib/caller-packs.ts";
 import { repoRoot } from "./lib/env.ts";
 
 const only = process.argv[2];
@@ -58,7 +58,9 @@ async function promptFor(persona: PersonaId): Promise<string> {
   const prompt = `${(await readFile(join(repoRoot, "personas", FOLDERS[persona], "prompt.md"), "utf8")).trim()}\n`;
   const names = new Set([...prompt.matchAll(/\{\{(\w+)\}\}/g)].map((match) => match[1]));
   const profile = await loadPersonaProfile(repoRoot, persona);
-  for (const slug of Object.values(CATEGORY_AGENT)) {
+  const desks = (await loadFileContentStore(repoRoot)).listCategories();
+  for (const category of await desks) {
+    const slug = category.id;
     const lines = callerBrief(profile, await loadTargetManifest(repoRoot, slug)).user_data;
     for (const name of names) {
       const value = lines[name as keyof typeof lines];
