@@ -2,14 +2,15 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { and, eq, inArray } from "drizzle-orm";
 import type { JobsOptions } from "bullmq";
-import { callerBrief, callVerdict, dimensionCell, judgeView, loadPersonaProfile, loadTargetManifest, manifestSlugOf, metricsOf, parseTranscript } from "../../../../packages/core/src/index.ts";
+import { callerBrief, callVerdict, dimensionCell, judgeView, loadPersonaProfile, loadTargetManifest, manifestSlugOf, metricsOf } from "../../../../packages/core/src/index.ts";
 import { mergePromptLines, patchMode, writeBrief } from "../../../../packages/judge/src/claude.ts";
 import { quoteSupportsFailure, scoreCall } from "../../../../packages/judge/src/jev.ts";
 import type { Database } from "../db/db.module";
 import { callMetrics, calls, fixSuggestions, personaAgents, runs, scores, targets, turns } from "../db/schema";
 import { env } from "../env";
 import { logLine } from "../log";
-import { getExecution, placeCall, readLiveAgent } from "./bolna";
+import { fetchDeskPrompt } from "../patch/bolna-target";
+import { bolnaCallerEngine, conversationFromExecution, personaTurns, placeOnce } from "./bolna-engine";
 import { executionFields } from "./execution";
 import { fixtureFile, isTerminal } from "./guards";
 import { clearSharedLine, releaseSharedLine } from "../runs/line-lock";
@@ -45,7 +46,7 @@ export async function startRun(db: Database, enqueue: Enqueue, runId: string) {
 
 export async function placeQueuedCall(db: Database, enqueue: Enqueue, callId: string) {
   const call = await loadCall(db, callId);
-  if (!call || call.bolnaExecutionId || call.verdict) {
+  if (!call || call.providerRef || call.bolnaExecutionId || call.verdict) {
     logLine(`place ${call?.personaId ?? callId} skipped`);
     return;
   }
@@ -72,6 +73,8 @@ export async function placeQueuedCall(db: Database, enqueue: Enqueue, callId: st
       .update(calls)
       .set({
         bolnaExecutionId: `fixture:${call.id}`,
+        providerRef: `fixture:${call.id}`,
+        channel: "voice",
         status: fields.status,
         executionRaw: fields.raw,
         startedAt: new Date(),
@@ -84,19 +87,38 @@ export async function placeQueuedCall(db: Database, enqueue: Enqueue, callId: st
 
   const userData = stringMap(call.userData);
   logLine(`placing ${call.personaId}`);
-  let placed: { executionId: string; status: string };
+  let placed: { providerRef: string; status: string; dialed: boolean };
   try {
     const agentId = await agentIdFor(db, call.personaId);
-    placed = await placeCall({ agentId, to: target.phoneE164, userData });
+    const engine = bolnaCallerEngine();
+    placed = await placeOnce({
+      existingRef: call.providerRef ?? call.bolnaExecutionId,
+      markPlacing: async () => {
+        await db.update(calls).set({ status: "placing", channel: "voice" }).where(eq(calls.id, call.id));
+      },
+      dial: () =>
+        engine.place({
+          caller: { engine: "bolna", agentId },
+          to: { kind: "e164", number: target.phoneE164 },
+          brief: { user_data: userData, success_criteria: [], critical_dimensions: [] },
+          idempotencyKey: call.id,
+        }),
+      saveRef: async (providerRef, status) => {
+        await db
+          .update(calls)
+          .set({ bolnaExecutionId: providerRef, providerRef, channel: "voice", status, startedAt: new Date() })
+          .where(eq(calls.id, call.id));
+      },
+    });
   } catch (error) {
     const message = error instanceof Error ? error.message : "place failed";
     logLine(`place ${call.personaId} failed: ${message}`);
     throw error;
   }
-  await db
-    .update(calls)
-    .set({ bolnaExecutionId: placed.executionId, status: placed.status, startedAt: new Date() })
-    .where(eq(calls.id, call.id));
+  if (!placed.dialed) {
+    logLine(`place ${call.personaId} skipped, ref already stored`);
+    return;
+  }
   await releaseSharedLine(db, call.runId, placed.status);
   await enqueue("call.watchdog", { callId: call.id, n: 1 }, { ...jobDefaults, jobId: `watch-${call.id}-1`, delay: WATCH_MS });
   logLine(`placed ${call.personaId} ${placed.status}`);
@@ -105,7 +127,8 @@ export async function placeQueuedCall(db: Database, enqueue: Enqueue, callId: st
 export async function watchCall(db: Database, enqueue: Enqueue, callId: string, n: number) {
   const call = await loadCall(db, callId);
   if (!call?.bolnaExecutionId || call.verdict || fixtureOf(call.userData)) return;
-  const fields = executionFields(await getExecution(call.bolnaExecutionId));
+  const watched = await bolnaCallerEngine().execution(call.bolnaExecutionId);
+  const fields = executionFields(watched.conversation.providerCost?.raw ?? null);
   await db.update(calls).set({ status: fields.status, executionRaw: fields.raw }).where(eq(calls.id, call.id));
   if (!redialing(fields.status, call.attempt)) await releaseSharedLine(db, call.runId, fields.status);
   if (isTerminal(fields.status)) {
@@ -135,7 +158,7 @@ export async function ingestCall(db: Database, enqueue: Enqueue, callId: string)
   const raw = fixture
     ? (JSON.parse(await readFile(fixtureFile(repoRoot, fixture), "utf8")) as unknown)
     : call.bolnaExecutionId
-      ? await getExecution(call.bolnaExecutionId)
+      ? (await bolnaCallerEngine().execution(call.bolnaExecutionId)).conversation.providerCost?.raw ?? null
       : null;
   if (!raw) {
     if (!fixture && call.bolnaExecutionId) await holdForExecution(db, enqueue, call);
@@ -146,7 +169,7 @@ export async function ingestCall(db: Database, enqueue: Enqueue, callId: string)
   if ((fields.status === "no-answer" || fields.status === "busy") && call.attempt < 2) {
     await db
       .update(calls)
-      .set({ attempt: 2, status: "pending", bolnaExecutionId: null, executionRaw: fields.raw })
+      .set({ attempt: 2, status: "pending", bolnaExecutionId: null, providerRef: null, executionRaw: fields.raw })
       .where(eq(calls.id, call.id));
     await enqueue("call.place", { callId: call.id }, { ...jobDefaults, jobId: `place-${call.id}-2`, delay: 60_000 });
     return;
@@ -176,7 +199,7 @@ export async function ingestCall(db: Database, enqueue: Enqueue, callId: string)
     return;
   }
 
-  const parsed = parseTranscript(fields.transcript);
+  const parsed = personaTurns(conversationFromExecution(raw, call.id).conversation);
   const metrics = metricsOf(parsed);
   await db.transaction(async (tx) => {
     await tx.delete(turns).where(eq(turns.callId, call.id));
@@ -536,8 +559,8 @@ async function buildCallerBlock(input: {
   let transcriberLanguage: string | null = null;
   if (agentId) {
     try {
-      const live = await readLiveAgent(agentId);
-      if (live.systemPrompt) currentPrompt = live.systemPrompt;
+      const live = await fetchDeskPrompt(agentId);
+      if (live.text) currentPrompt = live.text;
       transcriberLanguage = live.transcriberLanguage;
     } catch (error) {
       console.error(`patch block live prompt unread: ${(error as Error).message}`);

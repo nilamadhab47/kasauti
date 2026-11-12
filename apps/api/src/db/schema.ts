@@ -50,6 +50,7 @@ export const runs = pgTable("runs", {
   /** null on a first run. "full" redials every caller. "caller" redials one caller after their own patch. */
   rerunScope: text("rerun_scope"),
   status: text("status").notNull().default("queued"),
+  channel: text("channel").notNull().default("voice"),
   passRate: numeric("pass_rate"),
   shareToken: text("share_token").unique(),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
@@ -64,6 +65,8 @@ export const calls = pgTable("calls", {
   personaId: text("persona_id").notNull(),
   userData: jsonb("user_data").notNull(),
   bolnaExecutionId: text("bolna_execution_id").unique(),
+  providerRef: text("provider_ref").unique(),
+  channel: text("channel").notNull().default("voice"),
   status: text("status").notNull().default("pending"),
   attempt: integer("attempt").notNull().default(1),
   executionRaw: jsonb("execution_raw"),

@@ -58,7 +58,7 @@ One run is one target and a list of personas. The create body allows at most 8 p
 | 1. Create | Zod-parse the body. Consent required unless `fixtures` is set. Optional shared-line switch. Upsert `targets` by phone. Insert `runs` and one `calls` row per persona. Enqueue `run.start`. | `RunsService.create` |
 | 2. Caller brief | If a manifest slug resolves, `callerBrief(profile, manifest)` fills `calls.user_data`. Otherwise the call row stores `{}`. | `packages/core/src/caller-brief.ts` |
 | 3. Start | Status `running`. Enqueue `call.place` for the first `MAX_CONCURRENT_CALLS` pending rows, 20s apart when not a fixture. | `pipeline.startRun` |
-| 4. Place | Skip if this call already has an execution id or a verdict. Skip if this run already has that many in-flight calls. Else `POST /call` on Bolna with the caller agent id, the target phone, and `user_data`. | `placeQueuedCall`, `queue/bolna.ts` |
+| 4. Place | Skip if this call already has an execution id, a provider ref, or a verdict. Skip if this run already has that many in-flight calls. Else `POST /call` on Bolna with the caller agent id, the target phone, `user_data`, and `bypass_call_guardrails`. The dial goes through `CallerEngine`. The row stores `provider_ref` and `bolna_execution_id` as the same value. A retry that already has the ref does not dial again. | `placeQueuedCall`, `queue/bolna-engine.ts` |
 | 5. Talk | Bolna runs the caller agent. The target is whoever answers that phone. Kasauti does not sit in the audio path. | Bolna |
 | 6. Progress | `POST /webhooks/bolna?s=` stores the body and, on a terminal status, enqueues ingest. A watchdog polls `GET /executions/:id` every 15s for 8 minutes. | `webhook.controller.ts`, `watchCall` |
 | 7. Transcript | Flat Bolna string. `assistant` is the caller, `user` is what the caller heard. Rows go to `turns`. | `packages/core/src/transcript.ts`, `ingestCall` |
@@ -112,7 +112,7 @@ Tables in `apps/api/src/db/schema.ts`:
 | `targets` | One row per phone. `owner_email`, `platform` check (`bolna`, `vapi`, `retell`, `elevenlabs`, `other`), `bolna_agent_id`, `task_goal`, `facts` jsonb, consent time, shared-line lock columns. |
 | `persona_agents` | `persona_id` → Bolna caller agent id. Read in `agentIdFor`. No insert anywhere in `apps/` or `packages/`. |
 | `runs` | Target, label, parent, `rerun_scope`, status, `pass_rate`, unused `share_token`. |
-| `calls` | Persona, `user_data`, `bolna_execution_id`, status, attempt, `execution_raw`, `target_execution_raw`, recording key, duration, cost, hangup, ttfa, verdict. |
+| `calls` | Persona, `user_data`, `bolna_execution_id`, `provider_ref` (same value), `channel` (`voice`), status, attempt, `execution_raw`, `target_execution_raw`, recording key, duration, cost, hangup, ttfa, verdict. |
 | `turns` | `(call_id, idx)`, speaker `persona` or `target`. |
 | `call_metrics` | Turn counts, Hindi ratio, raw jsonb. Latency columns exist. Ingest writes the turn counts only. |
 | `scores` | Dimension, 0–5 or null, verdict, evidence jsonb, `judge_version`. Primary key includes `judge_version`. |

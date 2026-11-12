@@ -31,15 +31,18 @@ export async function bolna(method: string, path: string, body?: unknown): Promi
   return parsed;
 }
 
+/** The place body. A retry must not drop the guardrail bypass or the caller brief. */
+export function bolnaPlaceBody(input: { agentId: string; to: string; userData: Record<string, string> }) {
+  return {
+    agent_id: input.agentId,
+    recipient_phone_number: input.to,
+    user_data: input.userData,
+    bypass_call_guardrails: true,
+  };
+}
+
 export async function placeCall(input: { agentId: string; to: string; userData: Record<string, string> }) {
-  const placed = asRecord(
-    await bolna("POST", "/call", {
-      agent_id: input.agentId,
-      recipient_phone_number: input.to,
-      user_data: input.userData,
-      bypass_call_guardrails: true,
-    }),
-  );
+  const placed = asRecord(await bolna("POST", "/call", bolnaPlaceBody(input)));
   const executionId = typeof placed.execution_id === "string" ? placed.execution_id : "";
   if (!executionId) throw new Error("Bolna did not return an execution id");
   const status = typeof placed.status === "string" ? placed.status : "queued";

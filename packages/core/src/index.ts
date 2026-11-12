@@ -10,3 +10,15 @@ export { metricsOf } from "./metrics.js";
 export type { CallMetrics } from "./metrics.js";
 export { callVerdict, dimensionCell } from "./verdict.js";
 export type { CallVerdict, Cell } from "./verdict.js";
+export type {
+  AttemptStatus,
+  CallerEngine,
+  CallerRef,
+  Channel,
+  Conversation,
+  ConversationTurn,
+  Destination,
+  LivePrompt,
+  TargetAdapter,
+  TargetRef,
+} from "./seam.js";

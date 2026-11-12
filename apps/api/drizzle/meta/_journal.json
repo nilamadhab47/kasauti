@@ -29,6 +29,13 @@
       "when": 1793700000000,
       "tag": "0003_rerun_scope",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793800000000,
+      "tag": "0004_provider_ref",
+      "breakpoints": true
     }
   ]
 }

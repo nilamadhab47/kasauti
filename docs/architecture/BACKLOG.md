@@ -31,12 +31,12 @@ These two need no refactor. P-1 is the pricing input. P-2 is the label file Epic
 ## Epic 2 — Interfaces: Channel / CallerEngine / TargetAdapter
 *Goal: Bolna behind interfaces, no behavior change. `pipeline.ts` stops importing Bolna. Migration step 2.*
 
-- **K2-1 — Interface + Conversation types (S).** Define `Conversation`, `Channel`, `CallerEngine`, `TargetAdapter`, `TargetRef`, `LivePrompt` per TO_BE. Types only. *Done: compiles, exported.* Depends: Epic 1.
-- **K2-2 — BolnaCallerEngine (M).** Wrap `queue/bolna.ts` place/execution behind `CallerEngine`. Idempotency is our row, not a field Bolna may ignore: write `provider_ref` before the place counts as done, and a retry reads that row instead of dialing again. *Done: a dial goes through the engine; a retry with the same attempt id does not place a second call; fixture replay matches today.* Depends: K2-1, K2-5.
-- **K2-3 — BolnaTargetAdapter (M).** Wrap `runPatch` GET/PUT behind `TargetAdapter.fetchPrompt`/`writePrompt`. `fetchTranscript` returns `null` for now (wired in Epic 7). *Done: patch read/write goes through the adapter.* Depends: K2-1.
-- **K2-4 — Parse transcript in the engine, return Conversation (M).** Move Bolna transcript parse into the Bolna engine; `pipeline.ts` consumes `Conversation`, stops importing Bolna. `targetTranscript` stays null. *Done: `pipeline.ts` has no Bolna import; snapshot/fixtures unchanged.* Depends: K2-2.
-- **K2-5 — Schema: provider_ref + channel (S).** Add `provider_ref` (mirror `bolna_execution_id`) and a `channel` field (default `voice`) on calls/runs. *Done: migration applied; both written.* Depends: K2-1.
-- **K2-6 — Seam de-risk check (S).** One fixture replay + one inspected execution shape vs today's `executionFields`. No new live dial in this change. *Done: shapes match; documented.* Depends: K2-2, K2-4.
+- **K2-1 — Interface + Conversation types (S).** Done 2026-11-10. `Conversation`, `Channel`, `CallerEngine`, `TargetAdapter`, `TargetRef`, and `LivePrompt` are in `packages/core/src/seam.ts` and exported. Depends: Epic 1.
+- **K2-2 — BolnaCallerEngine (M).** Done 2026-11-10. Place and execution go through `bolnaCallerEngine`. The place body is unchanged. A stored `provider_ref` skips the next dial. Depends: K2-1, K2-5.
+- **K2-3 — BolnaTargetAdapter (M).** Done 2026-11-10. `runPatch` reads and writes through `bolnaTargetAdapter`. The desk transcript method returns null. Depends: K2-1.
+- **K2-4 — Parse transcript in the engine, return Conversation (M).** Done 2026-11-10. `pipeline.ts` consumes `Conversation` and does not import `queue/bolna.ts`. `targetTranscript` stays null. The stored turns still say `persona`. Snapshot unchanged. Depends: K2-2.
+- **K2-5 — Schema: provider_ref + channel (S).** Done 2026-11-10. `calls.provider_ref` mirrors `bolna_execution_id`. `calls.channel` and `runs.channel` default to `voice`. Applied on the local database. Depends: K2-1.
+- **K2-6 — Seam de-risk check (S).** Done 2026-11-10. A stored fixture execution matches `executionFields`, including duration, cost, and turns. No new live dial. Depends: K2-2, K2-4.
 
 ---
 
@@ -73,4 +73,4 @@ These two need no refactor. P-1 is the pricing input. P-2 is the label file Epic
 ## Suggested first week
 1. P-1 and P-2 (parallel, no code). P-1 records the unit. P-2 records caller-side labels. Neither is an F1 number.
 2. K1-1 → K1-2 → K1-3 (types, loader, snapshot). Stop there for the week.
-3. Epic 1 is done (K1-1 through K1-8). Do not start Epic 2 until asked.
+3. Epic 1 and Epic 2 are done. Epic 3 is the text simulation. Do not start it until asked.

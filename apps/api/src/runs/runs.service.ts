@@ -12,7 +12,8 @@ import { blockForCall, executePatch, hasKasautiFooter } from "../patch/patch";
 import { InboundService } from "../inbound/inbound.service";
 import { isDemoSlug } from "../inbound/plan";
 import { callerBrief, loadPersonaProfile, loadTargetManifest, manifestSlugOf } from "../../../../packages/core/src/index.ts";
-import { bolnaLanguage, liveAgentOf, liveCardOf, liveSettingsOf, withLongerSilence, withTranscriberLanguage, withoutModelHangup } from "../patch/live-agent";
+import { bolnaTargetAdapter, targetRefFor } from "../patch/bolna-target";
+import { liveAgentOf, liveCardOf, liveSettingsOf } from "../patch/live-agent";
 import { CATEGORY_IDS, slugFor, type CategoryId } from "./category";
 import { initialPromptFor } from "./initial-prompt";
 import { LineBusyError, clearSharedLine, readLineOccupancy, reserveSharedLine } from "./line-lock";
@@ -952,6 +953,20 @@ async function runPatch(input: {
   const manifest = slug ? await loadTargetManifest(repoRoot, slug) : null;
   const requestedLanguage = manifest?.bolna.default_transcriber_language || "multi";
   let transcriber: { flipped: boolean; from: string | null; to: string | null } | null = null;
+  const adapter = bolnaTargetAdapter(
+    {
+      readAgent: (agentId) => demoBolna("GET", `/v2/agent/${agentId}`),
+      writeAgent: (agentId, body) => demoBolna("PUT", `/v2/agent/${agentId}`, body).then(() => undefined),
+    },
+    {
+      requestedLanguage,
+      languageSwitchBelow3: input.languageSwitchBelow3,
+      heardHindi: input.heardHindi,
+      onTranscriber: (info) => {
+        transcriber = info;
+      },
+    },
+  );
   const result = await executePatch({
     enabled: input.enabled,
     agentId: input.agentId,
@@ -961,39 +976,13 @@ async function runPatch(input: {
     scope: input.scope,
     hindi: input.hindiClose,
     today: new Date().toISOString().slice(0, 10),
-    read: async (agentId) => {
-      const agent = (await demoBolna("GET", `/v2/agent/${agentId}`)) as Record<string, unknown>;
-      const prompts = (agent.agent_prompts ?? {}) as Record<string, unknown>;
-      const task1 = (prompts.task_1 ?? {}) as Record<string, unknown>;
-      return typeof task1.system_prompt === "string" ? task1.system_prompt : "";
-    },
+    read: async (agentId) => (await adapter.fetchPrompt(targetRefFor(agentId, slug ?? "clinic")))?.text ?? "",
     write: async (agentId, next) => {
-      const agent = (await demoBolna("GET", `/v2/agent/${agentId}`)) as Record<string, unknown>;
-      const nextLanguage = bolnaLanguage(requestedLanguage, agent.tasks);
-      const updated = withTranscriberLanguage(agent.tasks, {
-        languageSwitchBelow3: input.languageSwitchBelow3,
-        heardHindi: input.heardHindi,
-        nextLanguage,
-      });
-      const silenced = withoutModelHangup(updated.tasks);
-      const slower = withLongerSilence(silenced.tasks);
-      transcriber = { flipped: updated.flipped, from: updated.from, to: updated.to };
-      if (updated.flipped) console.log(`transcriber ${updated.from} -> ${updated.to}`);
-      if (silenced.changed) console.log("model hangup off");
-      if (slower.changed) console.log("silence hangup raised");
-      await demoBolna("PUT", `/v2/agent/${agentId}`, {
-        agent_config: {
-          agent_name: agent.agent_name,
-          agent_type: agent.agent_type,
-          agent_welcome_message: agent.agent_welcome_message,
-          webhook_url: agent.webhook_url,
-          tasks: slower.tasks,
-          ingest_source_config: agent.ingest_source_config,
-          calling_guardrails: agent.calling_guardrails,
-          call_summary_enabled: agent.call_summary_enabled,
-        },
-        agent_prompts: { task_1: { system_prompt: next } },
-        composition_by_language: { en: [{ type: "text", text: next }] },
+      await adapter.writePrompt(targetRefFor(agentId, slug ?? "clinic"), {
+        text: next,
+        fields: [],
+        transcriberLanguage: null,
+        fetchedAt: new Date().toISOString(),
       });
     },
   });
